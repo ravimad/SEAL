@@ -1,0 +1,234 @@
+\newcommand{\Null}{\ensuremath{\mathit{null}}}
+\newcommand{\WSR}{\textsc{WSR}}
+\newcommand{\procP}{P}
+\newcommand{\procQ}{Q}
+\newcommand{\proc}[1]{P_{#1}}
+
+%Latex symbols
+\newcommand{\larrow}[1]{\stackrel{#1}{\rightarrow}}
+\newcommand{\llangle}{\langle \! \langle}
+\newcommand{\rrangle}{\rangle \! \rangle}
+\newcommand{\corrabs}{\sim}
+
+%CFG entitites
+\newcommand{\entryOf}[1]{\mathit{entry}({#1})}
+\newcommand{\exitOf}[1]{\mathit{exit}({#1})}
+\newcommand{\exitS}{\mathit{exit}}
+\newcommand{\varOf}[1]{\varphi_{#1}}
+\newcommand{\avarOf}[1]{\vartheta_{#1}}
+\newcommand{\stmtedge}[3]{{#1} \larrow{#2} {#3}}
+\newcommand{\edge}[2]{{#1} \rightarrow {#2}}
+
+%syntactic entities
+\newcommand{\Vars}{\syn{Vars}}
+\newcommand{\Globals}{\syn{Globals}}
+\newcommand{\Locals}{\syn{Locals}}
+\newcommand{\Params}{\syn{Params}}
+\newcommand{\Fields}{\syn{Fields}}
+\newcommand{\Labels}{\syn{Labels}}
+\newcommand{\newst}{\syn{NewStmt}}
+\newcommand{\ldst}{\syn{LoadStmt}}
+\newcommand{\paramOf}[1]{\syn{Param}(#1)}
+
+%Auxiliary functions
+\newcommand{\alloc}{\mathit{Alloc^{\sharp}}}
+\newcommand{\load}{\mathit{Load^{\sharp}}}
+\newcommand{\initbind}{\mathit{InitBind^{\sharp}}}
+\newcommand{\lift}[1]{\hat{#1}}
+
+%semantic fucntions
+%\newcommand{\concsem}[1]{\sembrack{#1}_c}
+\newcommand{\concsem}[1]{\sembrack{#1}^{\natural}}
+\newcommand{\abssem}[1]{\sembrack{#1}^{\sharp}}
+\newcommand{\gabssem}[1]{\sembrack{#1}_a}
+\newcommand{\simplify}{\mathit{Simplify}}
+\newcommand{\nmOf}[1]{\mathit{NM_{#1}}}
+\newcommand{\mnodesOf}[1]{\mathit{NodesToMerge_{#1}}}
+\newcommand{\garcol}{\mathit{GC^{\natural}}}
+\newcommand{\absGarcol}{\mathit{GC^{\sharp}}}
+\newcommand{\push}[1]{\mathit{push}_{#1}}
+% \newcommand{\pop}[2]{\mathit{pop}_{#1}^{#2}}
+\newcommand{\pop}[1]{\mathit{pop}_{#1}}
+\newcommand{\callret}[1]{\mathit{Call}_{#1}}
+\newcommand{\abspush}[1]{\mathit{apush}_{#1}}
+\newcommand{\abspop}[2]{\mathit{apop}_{#1}^{#2}}
+\newcommand{\translate}[1]{\mathit{trans_{#1}}}
+\newcommand{\removeEscNodes}{\mathit{removeNonEscaping}}
+
+%xforms
+\newcommand{\xform}[2]{{#1}\langle{#2}\rangle}
+\newcommand{\xformop}{\langle \rangle}
+%\newcommand{\absxform}[3]{{#1}\llangle{#2}\rrangle^{#3}_a}
+\newcommand{\absxform}[3]{
+\ifthenelse{\equal{#3}{}} 
+    {{#1}\llangle{#2}\rrangle_{a}} 
+    {{#1}\llangle{#2}\rrangle_{#3}}
+}
+\newcommand{\absxformop}{\llangle \rrangle}
+\newcommand{\pxform}[3]{{#1} \llangle {#2,#3} \rrangle}
+\newcommand{\mabsxform}[2]{{#1}\llangle{#2}\rrangle}
+\newcommand{\paramxform}[3]{\overline{{#1}\llangle{#2}\rrangle}_{#3}}
+\newcommand{\append}{\mathit{Append}}
+%\newcommand{\abxform}[2]{{#1}\llangle{#2}\rrangle}
+%\newcommand{\concxform}[3]{{#1}\llangle{#2}\rrangle^{#3}_c}
+%\newcommand{\concxformop}{\llangle \rrangle_c}
+
+% CFD: Concrete Functional Domain
+\newcommand{\CFD}{{\mathcal F}_c}
+\newcommand{\leCFD}{\sqsubseteq_c}
+\newcommand{\leCFDT}{\leCFD^*}
+\newcommand{\joinCFD}{\sqcup_c}
+\newcommand{\bigjoinCFD}{{\textstyle \bigsqcup_c}}
+
+% AFD: Abstract Functional Domain
+\newcommand{\AFD}{{\mathcal F}_a}
+\newcommand{\leCO}{\sqsubseteq_{co}}
+\newcommand{\leCOT}{\leCO^*}
+\newcommand{\joinCO}{\sqcup_{co}}
+\newcommand{\bigjoinCO}{{\textstyle \bigsqcup_{co}}}
+
+% CGD: Concrete Graph Domain
+\newcommand{\CGD}{\mathbb{G}_c}
+% AGD: Abstract Graph Domain
+\newcommand{\AGD}{\mathbb{G}_a}
+
+% \G: a single graph
+\newcommand{\G}{g}
+% \GS: a set of graphs
+\newcommand{\GS}{G}
+% \T: a transformer graph
+\newcommand{\T}{\tau}
+% \CG: a concrete graph
+\newcommand{\CG}{ptg}
+
+% \AllV: universal set of vertices
+\newcommand{\AllV}{N_c}
+\newcommand{\AbsAllV}{N_a}
+% \V: vertex set
+\newcommand{\V}{\mathsf{V}}
+\newcommand{\Vof}[1]{\V_{#1}}
+\newcommand{\node}[1]{n_{#1}}
+% \E: edge set
+\newcommand{\E}{\mathsf{E}}
+% IV, IE, EV, EE: internal/external vertex/edge sets
+% \newcommand{\IV}{\textsc{IV}}
+% \newcommand{\IE}{\textsc{IE}}
+% \newcommand{\EV}{\textsc{EV}}
+% \newcommand{\EE}{\textsc{EE}}
+\newcommand{\IV}{\mathsf{IV}}
+\newcommand{\IE}{\mathsf{IE}}
+\newcommand{\EV}{\mathsf{EV}}
+\newcommand{\EE}{\mathsf{EE}}
+\newcommand{\paramState}{\pi}
+\newcommand{\HB}{\leadsto}
+\newcommand{\tedge}[3]{\langle #1,#2,#3 \rangle}
+
+%identity transformer
+\newcommand{\TID}{\mathit{\T_{id}}}
+
+\newcommand{\Ttuple}{(\EV,\EE,\paramState,\IV,\IE,\sigma,\HB)}
+\newcommand{\TtupleSub}[1]{(\EV_{#1},\EE_{#1},\paramState_{#1}, \IV_{#1},\IE_{#1}, \sigma_{#1}, \HB_{#1})}
+\newcommand{\GtupleSub}[1]{(\V_{#1},\E_{#1},\sigma_{#1})}
+
+\newcommand{\inEscapeSet}{\mathit{Escaping}}
+%\newcommand{\outEscapeSet}{\mathit{OutEscaping}}
+%\newcommand{\escapeSet}{\mathit{Escaping}}
+%\newcommand{\escapes}[1]{\mathit{escapes}_{#1}}
+
+%mapping operators
+\newcommand{\fmap}{\eta}
+\newcommand{\fmapOf}[2]{\eta\sembrack{#1,#2}}
+
+%partial orders
+\newcommand{\embeds}{\preceq}
+\newcommand{\partialembeds}[1]{\preceq^{#1}}
+
+%concretization function
+\newcommand{\gammaG}{\gamma_G}
+\newcommand{\gammaT}{\gamma_T}
+
+% AFDP: Abstract Funtional Domain with partitions
+\newcommand{\equivOf}[1]{\simeq_{#1}}
+\newcommand{\AFDP}{{\mathcal F}_m}
+\newcommand{\AFDPT}{\AFDP^*}
+\newcommand{\PartFunc}{\mathcal{P}}
+\newcommand{\PF}{\xi}
+\newcommand{\lePart}{\le_{p}}
+\newcommand{\joinPart}{\sqcup_{p}}
+\newcommand{\leAFDP}{\le_{m}}
+\newcommand{\leAFDPT}{\le_{m}^*}
+\newcommand{\joinAFDP}{\sqcup_{m}}
+\newcommand{\gammaM}{\gamma_M}
+\newcommand{\pabssem}[1]{\sembrack{#1}_m}
+\newcommand{\pabsxform}[3]{{#1}\llangle{#2}\rrangle^{#3}_m}
+
+\newcommand{\absCall}[3]{\mathit{Call}_{#3}^{\sharp}({#1},{#2})}
+\newcommand{\absPush}[1]{\mathit{push}_{#1}^{\sharp}}
+\newcommand{\absPop}[1]{\mathit{pop}_{#1}^{\sharp}}
+\newcommand{\absfmap}{\fmap_{a}}
+\newcommand{\absfmapOf}[2]{\fmap_{a}\sembrack{#1,#2}}
+\newcommand{\includesOf}[1]{\includes\sembrack{#1}}
+\newcommand{\includes}{\mathit{Incl}}
+
+%specialized semantics
+\newcommand{\absspecial}{\absdomainOf{\Omega}}
+\newcommand{\abssemspecial}[1]{\abssemOf{\Omega}{#1}}
+\newcommand{\absCallSpecial}[3]{\absCallOf{\Omega}{#1}{#2}{#3}}
+\newcommand{\fmapspecial}{\fmap_{\Omega}}
+
+%parametrized EV creation
+\newcommand{\paramtrans}[1]{\mathit{\overline{trans}_{#1}}}
+\newcommand{\transload}{\syn{Load^{\flat}}}
+\newcommand{\mulift}{\mathit{\mu_{\uparrow}}}
+\newcommand{\paramafmap}{\overline{\fmap}_{a}}
+\newcommand{\paramsimp}{\overline{\simplify}}
+\newcommand{\paramincl}{\overline{\includes}}
+\newcommand{\paramfmapsp}{\overline{\fmap}_{\Omega}}
+
+%parametrized domain elements
+\newcommand{\absdomain}{\mathcal{A}}
+\newcommand{\absdomainOf}[1]{\mathcal{A}_{#1}}
+\newcommand{\abssemOf}[2]{\sembrack{#2}_{#1}}
+\newcommand{\abstg}[1]{\mathit{\rho}_{#1}}
+\newcommand{\absID}{\mathsf{ID}^{\sharp}}
+\newcommand{\IDof}[1]{\mathsf{ID}_{#1}}
+\newcommand{\absCallOf}[4]{\mathit{Call^{#1}_{#4}}(#2,#3)}
+\newcommand{\absgamma}[1]{\mathit{\gamma_{#1}}}
+\newcommand{\absalpha}[1]{\mathit{\alpha_{#1}}}
+
+
+%WSR analysis
+\newcommand{\WSRtuple}{(\EV,\EE, \IV,\IE, \sigma)}
+\newcommand{\WSRtupleSub}[1]{(\EV_{#1},\EE_{#1}, \IV_{#1},\IE_{#1}, \sigma_{#1})}
+
+%Buss et al analysis
+\newcommand{\buss}{\textit{Buss \etal{}}}
+\newcommand{\approxOf}[1]{\Delta_{S}}
+
+%Lattner et al analysis
+\newcommand{\lattner}{\textit{Lattner \etal{}}}
+\newcommand{\gammabar}{\overline{\gamma}}
+\newcommand{\alphabar}{\overline{\alpha}}
+
+%Cheng et al analysis
+\newcommand{\cheng}{\textit{Cheng \etal{}}}
+\newcommand{\AP}{\mathit{AP}}
+\newcommand{\RAP}{\mathit{RAP}}
+\newcommand{\LAP}{\mathit{LAP}}
+\newcommand{\rot}{\mathit{Root}}
+\newcommand{\APL}{\mathit{AP_{L}}}
+\newcommand{\RAPL}{\mathit{RAP_{L}}}
+\newcommand{\LAPL}{\mathit{LAP_{L}}}
+\newcommand{\ap}{\delta}
+\newcommand{\aptwo}{\theta}
+\newcommand{\bound}{\mathit{bound}}
+\newcommand{\lconcat}{\mathit{lconcat}}
+\newcommand{\rconcat}{\mathit{rconcat}}
+\newcommand{\sptr}{\mathit{S_{PTR}}}
+\newcommand{\prefix}{\mathit{Prefix}}
+\newcommand{\allaps}{\mathit{AllAPs}}
+\newcommand{\eval}{\mathit{Eval}}
+\newcommand{\replace}[1]{\mathit{replace}_{#1}}
+%\newcommand{\nodes}{\mathit{Nodes}}
+%\newcommand{\simplifyOf}[1]{\mathit{Simplify_{#1}}}
+%\newcommand{\EAP}{\mathit{EAP}}

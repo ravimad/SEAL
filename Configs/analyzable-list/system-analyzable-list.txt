@@ -1,0 +1,3 @@
+Namespace: System.Collections.Generic
+Namespace: System.Collections.Specialized
+Class: System.ThrowHelper

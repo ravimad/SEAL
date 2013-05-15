@@ -1,0 +1,162 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\begin{document}
+
+\title{Implementation of the Composition Operation}
+\maketitle
+
+\input{genericmacros}
+\input{specificmacros}
+
+Consider the $\simplify$ operation defined as follows:
+Let $\T = (\EV, \EE,\paramState,\IV,IE,\sigma)$ and $\V = \EV \cup \IV$.
+%
+\begin{align}
+x \in \V & \Rightarrow  x \in \mu(x) \\
+\nonumber
+\langle u,f,v \rangle \in \IE, \langle u',f,v' \rangle \in \EE, \\
+\mu(u) \cap \mu(u') \ne \emptyset 
+& \Rightarrow \mu(v) \subseteq \mu(v') \label{eq:alias-rule}
+\end{align}
+%
+Let $\fmap$ denote the lfp value of $\mu$. Define $\T'$ as $(\EV', \EE',\paramState,\IV',\IE',\sigma')$
+where,
+%
+\begin{align*}
+\EV'		&= \hat{\fmap}(\V) \cap \EV \\
+\IV'		&= \hat{\fmap}(\V) \cap \IV \\
+\IE' 		&= \bigcup_{\langle u,f,v \rangle \in \IE} \fmap(u) \times \{ f \} \times \fmap(v) \\ 
+\EE' 		&= \bigcup_{\langle u,f,v \rangle \in \EE} \fmap(u) \times \{ f \} \times \{ v\} \\
+\sigma' 	&= \lambda x. \; \hat{\fmap}(\sigma(x)) \\
+\end{align*}
+%
+$\simplify(\T) = \removeEscNodes(\T')$.
+
+The computationally expensive part in the $\simplify$ operation is the determination of $\mu$ which involves a lfp computation.
+A naive implementation of the constraint~\ref{eq:alias-rule} would repeatedly scan through all pairs of internal
+and external edges in $\T$, check if the antecedent holds and apply the consequent 
+as long as the mapping $\mu$ changes. 
+In the following, the constraint~\ref{eq:alias-rule} is re-formulated in a different form so that 
+its computation can be incrementalized.
+In principle, the re-formulation is obtained by eliminating $\mu$ from the constraint~\ref{eq:alias-rule}
+(we nevertheless compute $\mu$ for reasons explained later).
+
+Say the computation of lfp of $\mu$ happens iteratively starting from $\emptyset$.
+Let the value of $\mu$ in the iteration $i$ be $\mu_i$ (where, $\mu_0 = \emptyset$).
+The lfp of $\mu$ is the value of $\mu_i$ such that $\mu_i = \mu_{i-1}$.
+$\mu_i$ is defined using $\mu_{i-1}$ as follows:
+%
+\begin{align}
+\mu_0(x) &= \emptyset \\
+x \in \V & \Rightarrow  x \in \mu_1(x) \\
+\nonumber
+\langle u,f,v \rangle \in \IE, \langle u',f,v' \rangle \in \EE, \\
+\mu_{i-1}(u) \cap \mu_{i-1}(u') \ne \emptyset  & \Rightarrow \mu_{i-1}(v) \subseteq \mu_i(v') 
+\end{align}
+
+Now, let us combine the computation of $\IE'$ and $\EE'$  with that of $\mu_i$  as follows:
+(For now ignore $\sigma$ and consider only the edges)
+%
+\begin{align}
+\mu_0(x) &= \emptyset \\
+\IE 	 & \subseteq \IE' \\
+\EE 	 & \subseteq \EE' \\
+x \in \V & \Rightarrow  x \in \mu_1(x) \\
+\nonumber
+\langle u,f,v \rangle \in \IE, \langle u',f,v' \rangle \in \EE, \\
+\nonumber
+\mu_{i-1}(u) \cap \mu_{i-1}(u') \ne \emptyset  & \Rightarrow \mu_{i-1}(v) \subseteq \mu_i(v'),  \\
+\nonumber
+& \bigcup_{\langle x,f,v' \rangle \in \IE} \mu_{i-1}(x) \times \{ f \} \times \mu_{i-1}(v) \subseteq \IE', \\
+\nonumber
+& \bigcup_{\langle v',f,x \rangle \in \IE} \mu_{i-1}(v) \times \{ f \} \times \mu_{i-1}(x) \subseteq \IE', \\
+& \bigcup_{\langle v',f,x \rangle \in \EE} \mu_{i-1}(v) \times \{ f \} \times \{  x \} \subseteq \EE' 
+\label{eq:new-alias}
+\end{align}
+%
+We define $\EV'$,$\IV'$ and $\sigma'$ as before using the lfp of $\mu$.
+In the above constraints, whenever a node $u$ is added to $\mu_i(v)$ (for any $v$), 
+all the internal and external edges on $v$ are  translated to $u$, eagerly.
+
+The following invariants hold in the above constraints.
+%
+\begin{align}
+\nonumber
+\langle u,f,v \rangle \in \IE, \langle u',f,v' \rangle \in \EE,\mu_{i}(u) \cap \mu_{i}(u') \ne \emptyset \\
+\qquad \implies \exists r. \langle r,f,v \rangle \in \IE', \langle r,f,v' \rangle \in \EE' \label{eq:inv1}
+\end{align}
+%
+For any iteration $i$,
+\begin{align}
+\langle u,f,v \rangle \in \IE' & \implies \mu_{i-1}(u) \times \{ f \} \times \mu_{i-1}(v) \subseteq \IE' \label{eq:inv2}
+\end{align}
+%
+Using invariant~\ref{eq:inv1}, the constraint~\ref{eq:new-alias} can be rewritten as follows:
+%
+\begin{align}
+\nonumber
+\langle r,f,v \rangle \in \IE', \langle r,f,v' \rangle \in \EE' 
+						 & \Rightarrow \mu_{i-1}(v) \subseteq \mu_i(v'),  \\
+\nonumber
+& \bigcup_{\langle x,f,v' \rangle \in \IE} \mu_{i-1}(x) \times \{ f \} \times \mu_{i-1}(v) \subseteq \IE', \\
+\nonumber
+& \bigcup_{\langle v',f,x \rangle \in \IE} \mu_{i-1}(v) \times \{ f \} \times \mu_{i-1}(x) \subseteq \IE', \\
+& \bigcup_{\langle v',f,x \rangle \in \EE} \mu_{i-1}(v) \times \{ f \} \times \{  x \} \subseteq \EE' 
+\end{align}
+%
+By invariant~\ref{eq:inv2}, $\langle r,f,v \rangle \in \IE'$ implies that 
+$\{ r \} \times \{ f \} \times \mu_{i-1}(v) \subseteq \IE'$ and 
+$\mu_{i-1}(r) \times \{ f \} \times \{ v \} \subseteq \IE'$.
+Hence, the above constraint can be rewritten as follows.
+%
+\begin{align}
+\nonumber
+ \{ r \} \times \{ f \} \times A \subseteq \IE', \langle r,f,v' \rangle \in \EE' 
+						 & \Rightarrow A \subseteq \mu_i(v'),  \\
+\nonumber
+& \bigcup_{\langle x,f,v' \rangle \in \IE'} \{ x \} \times \{ f \} \times A \subseteq \IE', \\
+\nonumber
+& \bigcup_{\langle v',f,x \rangle \in \IE'} A \times \{ f \} \times \{ x \} \subseteq \IE', \\
+& \bigcup_{\langle v',f,x \rangle \in \EE} A \times \{ f \} \times \{  x \} \subseteq \EE' 
+\end{align}
+%
+Again, by invariant~\ref{eq:inv2}, the above can be further optimized as follows:
+%
+\begin{align}
+\nonumber
+& \{ r \} \times \{ f \} \times A \subseteq \IE', \langle r,f,v' \rangle \in \EE' \Rightarrow \\
+\nonumber
+& \qquad \text{let } B = A \setminus \mu_{i-1}(v'), \\
+\nonumber
+& \qquad B \subseteq \mu_i(v'),  \\
+\nonumber
+& \qquad \bigcup_{\langle x,f,v' \rangle \in \IE'} \{ x \} \times \{ f \} \times B \subseteq \IE', \\
+\nonumber
+& \qquad \bigcup_{\langle v',f,x \rangle \in \IE'} B \times \{ f \} \times \{ x \} \subseteq \IE', \\
+& \qquad \bigcup_{\langle v',f,x \rangle \in \EE'} B \times \{ f \} \times \{  x \} \subseteq \EE' \label{eq:alias-final}
+\end{align}
+
+Notice that in the constraint~\ref{eq:alias-final}, computing $\mu$ is not strictly necessary (still it helps
+in optimizing the computation). However, we compute $\mu$ in order to compute the other components 
+of the transformer graphs (\eg{} $\sigma'$, vertex sets, may write sets for purity analysis etc.) using the 
+earlier equations.
+
+Constraint~\ref{eq:alias-final} can be incrementally evaluated as described below. 
+Initially, we consider all vertices in the initial graph $\T$ and check if the antecedent applies. 
+If yes, we perform the consequent. 
+Whenever, a new internal edge $\langle r,f,v \rangle$ is added, we consider every external edge
+$\langle r,f,v' \rangle$ from $r$. Clearly, the internal and external edges satisfy the antecedent.
+Also, they cannot have been processed earlier since $\langle r,f,v \rangle$ is a newly added edge.
+Hence, we perform the consequent for the internal /external edge pair.
+Similarly, whenever a new external edge $\langle r,f,v \rangle$ is added, 
+we consider all the internal edges on $r$ and trigger the consequent. 
+In a nutshell, the incremental algorithm keeps track of the newly added internal and external edges 
+and, in every iteration, identifies the new relations that satisfy the antecedent and triggers the 
+consequent only for those relations.
+In contrast, the direct implementation of the original constraints (\ref{eq:alias-rule}) 
+has to scan all pairs of internal and external edges whenever there is a change to $\mu$. 
+
+\end{document}

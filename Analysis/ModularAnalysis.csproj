@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{56F695FA-E3CB-4A52-969C-DDD50699BB2E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <StartupObject>
+    </StartupObject>
+    <RootNamespace>SafetyAnalysis.Purity</RootNamespace>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>Purity</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <CodeContractsAssemblyMode>0</CodeContractsAssemblyMode>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Bin\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE;DEBUG;PHX_DEBUG_SUPPORT;PHX_DEBUG_DUMPS;PHX_DEBUG_CHECKS;</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <IncrementalBuild>false</IncrementalBuild>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>False</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>False</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>False</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>False</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>False</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>False</CodeContractsRedundantAssumptions>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly>
+    </CodeContractsCustomRewriterAssembly>
+    <CodeContractsCustomRewriterClass>
+    </CodeContractsCustomRewriterClass>
+    <CodeContractsLibPaths>
+    </CodeContractsLibPaths>
+    <CodeContractsExtraRewriteOptions>
+    </CodeContractsExtraRewriteOptions>
+    <CodeContractsExtraAnalysisOptions>
+    </CodeContractsExtraAnalysisOptions>
+    <CodeContractsBaseLineFile>
+    </CodeContractsBaseLineFile>
+    <CodeContractsCacheAnalysisResults>False</CodeContractsCacheAnalysisResults>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Bin\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <IncrementalBuild>false</IncrementalBuild>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="BUPhase\AnalysisUtil.cs" />
+    <Compile Include="BUPhase\AnalyzableMethods.cs" />
+    <Compile Include="BUPhase\CallUtil.cs" />
+    <Compile Include="BUPhase\Data\Call.cs" />
+    <Compile Include="BUPhase\Data\PartitionPurityData.cs" />
+    <Compile Include="BUPhase\Data\PurityAnalysisData.cs" />
+    <Compile Include="BUPhase\Data\PurityDataUtil.cs" />
+    <Compile Include="BUPhase\FlowInsensitivePurityAnalysis.cs" />
+    <Compile Include="BUPhase\FlowSensitiveAnalysis.cs" />
+    <Compile Include="BUPhase\MethodLevelAnalysis.cs" />
+    <Compile Include="BUPhase\PurityAnalysisPhase.cs" />
+    <Compile Include="BUPhase\PurityAnalysisSummary.cs" />
+    <Compile Include="BUPhase\PurityAnalysisTransformers.cs" />
+    <Compile Include="BUPhase\PurityAnalysisWalker.cs" />
+    <Compile Include="BUPhase\Simplifier.cs" />
+    <Compile Include="BUPhase\SummaryInitializationPhase.cs" />
+    <Compile Include="CallgraphPhase\AddCallGraphEdgesPhase.cs" />
+    <Compile Include="CallgraphPhase\CHACallGraphConstructionPhase.cs" />
+    <Compile Include="ClientPhases\DependenceAnalysis.cs" />
+    <Compile Include="ClientPhases\LINQPurityAnalysis.cs" />
+    <Compile Include="ClientPhases\PurityAnalysis\AccessPathRegexp.cs" />
+    <Compile Include="ClientPhases\PurityAnalysis\PurityReport.cs" />
+    <Compile Include="ClientPhases\PurityAnalysis\PurityReportGenerationPhase.cs" />
+    <Compile Include="ClientPhases\PurityAnalysis\PurityReportUtil.cs" />
+    <Compile Include="DBmanager\SummaryDBManager.cs" />
+    <Compile Include="DBmanager\DBSettings.cs" />
+    <Compile Include="HandlerProvider\PredicatedHandlerProvider.cs" />
+    <Compile Include="HandlerProvider\IPredictedSummaryHandlerProvider.cs" />
+    <Compile Include="HandlerProvider\PredicatedSummaryHandlerProvider.cs" />
+    <Compile Include="NodeMerger\LosslessNodeMerger.cs" />
+    <Compile Include="NodeMerger\NodeSkippedCallMerger.cs" />
+    <Compile Include="NodeMerger\LossyNodeMerger.cs" />
+    <Compile Include="NodeMerger\SkippedCallHash.cs" />
+    <Compile Include="OperandHandler\HeapGraphHandler\AddressOperandHandler.cs" />
+    <Compile Include="Statistics\StatisticsManager.cs" />
+    <Compile Include="StubManagers\MethodStubs\DBMethodStub.cs" />
+    <Compile Include="StubManagers\CallStubs\DBCallStub.cs" />
+    <Compile Include="StubManagers\CallStubs\SyntheticCallStub.cs" />
+    <Compile Include="StubManagers\CallStubs\CallStubManager.cs" />
+    <Compile Include="StubManagers\MethodStubs\SyntheticMethodStub.cs" />
+    <Compile Include="StubManagers\DBStubManager.cs" />
+    <Compile Include="SummaryHandlers\CallResolver\CallBackResolver.cs" />
+    <Compile Include="SummaryHandlers\CallResolver\CallResolver.cs" />
+    <Compile Include="SummaryHandlers\CallSummaryHandler.cs" />
+    <Compile Include="SummaryHandlers\HeapGraphBuilder\CompositionOperator.cs" />
+    <Compile Include="SummaryHandlers\HeapGraphBuilder\HeapGraphBuilder.cs" />
+    <Compile Include="SummaryHandlers\HeapGraphBuilder\HigherOrderHeapGraphBuilder.cs" />
+    <Compile Include="SummaryHandlers\HeapGraphBuilder\VertexMap.cs" />
+    <Compile Include="SummaryHandlers\HeapGraphBuilder\VertexMultimap.cs" />
+    <Compile Include="SummaryHandlers\IPredicatedSummaryHandler.cs" />
+    <Compile Include="SummaryHandlers\IPuritySummaryHandler.cs" />
+    <Compile Include="SummaryHandlers\ISummaryHandler.cs" />
+    <Compile Include="SummaryHandlers\NewObjSummaryHandler.cs" />
+    <Compile Include="SummaryHandlers\SummaryReaders\CalleeSummaryReader.cs" />
+    <Compile Include="SummaryHandlers\SummaryReaders\puritysummaries.designer.cs" />
+    <Compile Include="TypeData\MethodInfo.cs" />
+    <Compile Include="TypeData\TypeHierarchy.cs" />
+    <Compile Include="TypeData\TypeInfo.cs" />
+    <Compile Include="TypeData\TypeMethodInfoUtil.cs" />
+    <Compile Include="OperandHandler\HeapGraphHandler\DelegateOperandHandler.cs" />
+    <Compile Include="StubManagers\MethodStubs\MethodStubManager.cs" />
+    <Compile Include="OperandHandler\HeapGraphHandler\AbolsuteOperandHandler.cs" />
+    <Compile Include="OperandHandler\HeapGraphHandler\FunctionOperandHandler.cs" />
+    <Compile Include="OperandHandler\HeapGraphHandler\ImmediateOperandHandler.cs" />
+    <Compile Include="OperandHandler\HeapGraphHandler\PointerOperandHandler.cs" />
+    <Compile Include="OperandHandler\HeapGraphHandler\ComplexOperandHandler.cs" />
+    <Compile Include="OperandHandler\HeapGraphHandler\IHeapGraphOperandHandler.cs" />
+    <Compile Include="OperandHandler\HeapGraphHandler\SymbolicOperandHandler.cs" />
+    <Compile Include="HandlerProvider\IPredicatedOperandHandlerProvider.cs" />
+    <Compile Include="OperandHandler\IOperandHandler.cs" />
+    <Compile Include="HandlerProvider\ITypedOperandHandlerProvider.cs" />
+    <Compile Include="HandlerProvider\PredicatedOperandHandlerProvider.cs" />
+    <Compile Include="HandlerProvider\TypedOperandHandlerProvider.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="StubManagers\SummaryTemplates.cs" />
+    <Compile Include="NodeMerger\NodeMerger.cs" />
+    <Compile Include="OperandHandler\HeapGraphHandler\VariableOperandHandler.cs" />
+    <Compile Include="OperandHandler\IPredicatedOperandHandler.cs" />
+    <Compile Include="OperandHandler\ITypedOperandHandler.cs" />
+    <Compile Include="Statistics\ExplosionReasons.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="architecture-msil, Version=0.64.30627.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalLibs\architecture-msil.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="phx, Version=0.64.30627.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalLibs\phx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="QuickGraph, Version=3.3.50603.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalLibs\QuickGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.SqlServerCe, Version=3.5.1.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalLibs\System.Data.SqlServerCe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.VisualBasic.PowerPacks.10.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft Visual Basic PowerPacks 10.0</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="SummaryHandlers\SummaryManager\puritysummaries.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>puritysummaries.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SummaryHandlers\SummaryManager\puritysummaries.dbml.layout">
+      <DependentUpon>puritysummaries.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TransformerGraphs\HeapGraph.csproj">
+      <Project>{679A37A4-F974-4675-9DCF-39F797B760F2}</Project>
+      <Name>HeapGraph</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{2B711579-7195-4E5F-B5DB-031E5929117D}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="purityDB" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=rse-server-8;Initial Catalog=purityDB;Integrated Security=True" SettingsObjectName="SafetyAnalysis.Purity.Properties.Settings" SettingsPropertyName="purityDBConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.puritysummaries" Member="puritysummaries">
+    <Type Name="puritysummary">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="typename" Type="System.String" DbType="NVarChar(4000) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="methodSignature" Type="System.String" DbType="NVarChar(4000) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="purityData" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TypeHierarchy" Member="TypeHierarchies">
+    <Type Name="TypeHierarchy">
+      <Column Name="Typename" Type="System.String" DbType="NVarChar(4000) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SuperTypename" Type="System.String" DbType="NVarChar(4000) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TypeInfo" Member="TypeInfos">
+    <Type Name="TypeInfo">
+      <Column Name="typename" Type="System.String" DbType="VarChar(200) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IsInterface" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dllname" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MethodInfo" Member="MethodInfos">
+    <Type Name="MethodInfo">
+      <Column Name="typename" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="methodname" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="methodSignature" Type="System.String" DbType="VarChar(4000) NOT NULL" CanBeNull="false" />
+      <Column Name="IsVirtual" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsAbstract" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsInstance" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="dllname" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

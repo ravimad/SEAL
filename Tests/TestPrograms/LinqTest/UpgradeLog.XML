@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="LinqTest">
+</Property><Property Name="Solution File" Value="C:\sd\codebox\speculation\SafetyAnalysis\trunk\SafetyAnalysisWithCB\Tests\LinqTest\LinqTest.sln">
+</Property><Property Name="Date" Value="12 March 2012">
+</Property><Property Name="Time" Value="11:45:14">
+</Property></Properties><Event ErrorLevel="0" Project="LinqTest" Source="LinqTest.csproj" Description="Project file successfully backed up as C:\sd\codebox\speculation\SafetyAnalysis\trunk\SafetyAnalysisWithCB\Tests\LinqTest\Backup\LinqTest.csproj">
+</Event><Event ErrorLevel="0" Project="LinqTest" Source="Linqtest.cs" Description="File successfully backed up as C:\sd\codebox\speculation\SafetyAnalysis\trunk\SafetyAnalysisWithCB\Tests\LinqTest\Backup\Linqtest.cs">
+</Event><Event ErrorLevel="0" Project="LinqTest" Source="Properties\AssemblyInfo.cs" Description="File successfully backed up as C:\sd\codebox\speculation\SafetyAnalysis\trunk\SafetyAnalysisWithCB\Tests\LinqTest\Backup\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="LinqTest" Source="LinqTest.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="LinqTest" Source="LinqTest.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="LinqTest" Source="LinqTest.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

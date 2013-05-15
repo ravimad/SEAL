@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<assemblyIdentity type="win32" name="msdia100" version="9.0.30729.1" language="neutral" processorArchitecture="x86" />
+	<file name="msdia100.dll">
+		<comClass clsid="{B86AE24D-BF2F-4ac9-B5A2-34B14E4CE11D}" threadingModel="both"/>
+	</file>
+</asmv1:assembly>

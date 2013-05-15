@@ -1,0 +1,4 @@
+﻿@Type [ScopeRuntime]ScopeRuntime.RowSet		= [ScopeStubs]ScopeStubs.RowSet
+@Type [ScopeRuntime]ScopeRuntime.ColumnData	= [ScopeStubs]ScopeStubs.ColumnData
+@Type [ScopeRuntime]ScopeRuntime.Row		= [ScopeStubs]ScopeStubs.Row
+@Type [ScopeRuntime]ScopeRuntime.Schema		= [ScopeStubs]ScopeStubs.Schema
