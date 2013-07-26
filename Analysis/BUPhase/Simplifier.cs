@@ -196,7 +196,7 @@ namespace SafetyAnalysis.Purity
          
             //collect all escaping nodes or variables referred to by the skipped calls
             HeapVertexSet escapingVertices = new HeapVertexSet();
-            escapingVertices.UnionWith(AnalysisUtil.GetSkcallVariables(data));
+            escapingVertices.UnionWith(AnalysisUtil.GetSkcallVariables(data));            
             escapingVertices.UnionWith(AnalysisUtil.GetEscapingVertices(data));            
 
             foreach (HeapVertexBase vertex in data.OutHeapGraph.Vertices)

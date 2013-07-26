@@ -175,7 +175,7 @@ namespace SafetyAnalysis.Checker
                     clientConfig.PhaseList.AppendPhase(PurityReportGenerationPhase.New(clientConfig));
                     //clientConfig.PhaseList.AppendPhase(LINQPurityPhase.New(
                     //    clientConfig, MethodLevelAnalysis.MethodsPassedToLinqQueries));                
-                    clientConfig.PhaseList.AppendPhase(DependenceAnalysisPhase.New(clientConfig));
+                    //clientConfig.PhaseList.AppendPhase(DependenceAnalysisPhase.New(clientConfig));
                 }
 
                 Phx.Phases.PhaseConfiguration finalizeConfig

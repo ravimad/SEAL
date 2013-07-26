@@ -199,4 +199,12 @@ namespace Stubs
             return null;
         }
     }
+
+    public class HashHelpers
+    {
+        public static long GetEntropy()
+        {
+            return 0;
+        }
+    }
 }

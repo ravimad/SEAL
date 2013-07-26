@@ -23,12 +23,15 @@ namespace SafetyAnalysis.Purity
         public PurityAnalysisData Compute(Phx.FunctionUnit functionUnit)
         {
             var newData = new PartitionPurityData(PartitionGraph.New());
-            CFGFixPointComputation(functionUnit, newData);    
-            return newData.ConvertToPlainData();
+            var endData = CFGFixPointComputation(functionUnit, newData);
+            if (endData == null)
+                return new PurityAnalysisData(new HeapGraph());
+            else 
+                return endData.ConvertToPlainData();
         }
 
         //for now the transformers only perform weak updates, need to modify this
-        public void CFGFixPointComputation(Phx.FunctionUnit functionUnit, PartitionPurityData initData)
+        public PartitionPurityData CFGFixPointComputation(Phx.FunctionUnit functionUnit, PartitionPurityData initData)
         {
             var cfg = functionUnit.FlowGraph;
             //var filename = GeneralUtil.ConvertToFilename(functionUnit);
@@ -58,15 +61,19 @@ namespace SafetyAnalysis.Purity
                 currentEntries.Remove(entry);
 
                 var bbid = entry.Key;
-                var bb = cfg.Block(bbid);
+                var bb = cfg.Block(bbid);                
                 var oper = entry.Value;
 
                 if (oper == OPER.PUSH)
                 {
-                    //Console.WriteLine("BBout: " + bbid);
+                    //if(MethodLevelAnalysis.debug_flag)
+                    //    Console.WriteLine("Processing BB: " + bbid);                    
                     //inData will be non-null in this case
                     var inData = inFacts[bbid];                          
                     var outData = EvaluateBlock(bb, inData);
+
+                    //if (MethodLevelAnalysis.debug_flag)
+                    //    Console.WriteLine("outData: hasTheVariable ? " + AnalysisUtil.HasVar(outData,7310));                    
 
                     //check if the outData has changed
                     var oldData = outFacts[bbid];
@@ -93,7 +100,8 @@ namespace SafetyAnalysis.Purity
                 }
                 else if (oper == OPER.JOIN)
                 {
-                    //Console.WriteLine("BBIn: " + bbid);
+                    //if (MethodLevelAnalysis.debug_flag)
+                    //    Console.WriteLine("Joining pred data: " + bbid);
                     var oldData = inFacts[bbid];
 
                     PartitionPurityData joinData = null;
@@ -117,6 +125,9 @@ namespace SafetyAnalysis.Purity
                             }
                         }
                     }
+
+                    //if (MethodLevelAnalysis.debug_flag)
+                    //    Console.WriteLine("joinData: hasTheVariable ? " + AnalysisUtil.HasVar(joinData, 7310));                    
                                    
                     //check if the inData has changed                    
                     if (HasFactsChanged(joinData, oldData))
@@ -131,7 +142,8 @@ namespace SafetyAnalysis.Purity
                         }
                     }
                 }                
-            }            
+            }
+            return outFacts[cfg.EndBlock.Id];
         }
 
         private bool HasFactsChanged(PartitionPurityData newData, PartitionPurityData oldData)
@@ -149,6 +161,7 @@ namespace SafetyAnalysis.Purity
             var outData = inData.CopyNonShared();
             foreach (Phx.IR.Instruction instruction in block.Instructions)
             {
+                //Console.WriteLine(instruction);
                 _transformers.Apply(instruction, outData);
             }
             return outData;

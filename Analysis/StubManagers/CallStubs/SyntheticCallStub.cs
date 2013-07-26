@@ -33,7 +33,9 @@ namespace SafetyAnalysis.Purity.Summaries
                 string signature = mcall.GetSignature();
 
                 var qualname = AnalysisUtil.GetQualifiedName(call);
-                if (qualname.Equals(
+                if (qualtypename.Equals("[mscorlib]System.String"))
+                    return true;
+                else if (qualname.Equals(
                     "[ScopeRuntime]ScopeRuntime.Row::get_Item/(System.String)[ScopeRuntime]ScopeRuntime.ColumnData"))
                     return true;
                 else if (qualname.Equals(
@@ -63,6 +65,14 @@ namespace SafetyAnalysis.Purity.Summaries
                 string signature = mcall.GetSignature();
 
                 var qualname = AnalysisUtil.GetQualifiedName(call);
+                if (qualtypename.Equals("[mscorlib]System.String"))
+                {
+                    //this is a string method which is a pure functional implementation
+                    //so create a new object if the destination operand is a pointer operand                
+                    var outData = SummaryTemplates.CreatePureData();
+                    SummaryTemplates.MakeAllocator(outData, "[mscorlib]System.String", methodname);
+                    return outData;
+                }
                 if (qualname.Equals(
                     "[ScopeRuntime]ScopeRuntime.Row::get_Item/(System.String)[ScopeRuntime]ScopeRuntime.ColumnData"))
                 {

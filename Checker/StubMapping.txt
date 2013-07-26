@@ -35,3 +35,4 @@
 [mscorlib]System.Math::Atan2/(f64,f64)f64	= [Stubs]Stubs.SystemMath::Binary/(f64,f64)f64
 [mscorlib]System.Math::Pow/(f64,f64)f64		= [Stubs]Stubs.SystemMath::Binary/(f64,f64)f64
 [mscorlib]System.Math::SplitFractionDouble/(up32->f64)f64	=	[Stubs]SystemMath::SplitFractionDouble/(up32->f64)f64
+[mscorlib]System.Collections.HashHelpers::GetEntropy/()i64	=	[Stubs]Stubs.HashHelpers::GetEntropy/()i64

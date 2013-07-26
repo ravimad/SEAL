@@ -11,6 +11,23 @@ namespace SafetyAnalysis.Purity
 {
     public class AnalysisUtil
     {
+        /// <summary>
+        /// A function written for debugging purposes
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="varid"></param>
+        /// <returns></returns>
+        public static bool HasVar(PurityAnalysisData data, int varid)
+        {
+            var res = from vert in data.OutHeapGraph.Vertices
+                      where (vert is VariableHeapVertex) && 
+                        ((vert as VariableHeapVertex).Id == varid)
+                      select vert;
+            if (res.Any())
+                return true;
+            return false;
+        }
+
         public static IEnumerable<HeapVertexBase> GetSkcallVariables(PurityAnalysisData data)
         {
             var eargs = from call in data.SkippedCalls
@@ -25,8 +42,8 @@ namespace SafetyAnalysis.Purity
         /// </summary>
         /// <param name="data"></param>
         public static HeapVertexSet GetInitialEscapeSet(PurityAnalysisData data)
-        {            
-            var argnodes = from var in GetSkcallVariables(data)
+        {                                                    
+            var argnodes = from var in GetSkcallVariables(data)                           
                            from edge in data.OutHeapGraph.OutEdges(var)
                            select edge.Target;
                                

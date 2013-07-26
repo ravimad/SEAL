@@ -293,20 +293,25 @@ namespace SafetyAnalysis.Framework.Graphs
         {
             //merge unique graphs
             //as a side effect we go to a more efficient representation
+            
+            //merge the vertices
+            foreach (var vert in pg.unique.Vertices)
+            {
+                if (!this.ContainsVertex(vert))
+                    this.unique.AddVertex(vert);
+            }
+            //merge the edges
             foreach (var edge in pg.unique.Edges)
             {
-                if (!this.shared.ContainsHeapEdge(edge))
+                if (!this.ContainsHeapEdge(edge))
                 {
-                    if (!this.unique.ContainsHeapEdge(edge))
-                    {
-                        if (!this.unique.ContainsVertex(edge.Source))
-                            this.unique.AddVertex(edge.Source);
+                    if (!this.unique.ContainsVertex(edge.Source))
+                        this.unique.AddVertex(edge.Source);
 
-                        if (!this.unique.ContainsVertex(edge.Target))
-                            this.unique.AddVertex(edge.Target);
+                    if (!this.unique.ContainsVertex(edge.Target))
+                        this.unique.AddVertex(edge.Target);
 
-                        this.unique.AddEdge(edge);
-                    }
+                    this.unique.AddEdge(edge);
                 }
             }
         }

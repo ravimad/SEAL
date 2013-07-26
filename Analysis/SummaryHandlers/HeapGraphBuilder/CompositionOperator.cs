@@ -330,7 +330,10 @@ namespace SafetyAnalysis.Purity.Summaries
                 foreach (var refv in call.GetReferredVertices())
                 {
                     foreach (var v in finalmap.GetMappedSet(refv))
+                    {
+                        //TODO: may need to ensure that the vertex is removed from the strong update set
                         AddVertexToCallerGraph(v);
+                    }
                 }                
                 _callerData.AddSkippedCall(call);
             }

@@ -55,6 +55,12 @@ namespace SafetyAnalysis.Purity
 
         #endregion private state              
 
+        #region DEBUG STATE
+
+        public static bool debug_flag = false;
+
+        #endregion DEBUG STATE
+
         public MethodLevelAnalysis(Phx.FunctionUnit funit)
         {
             functionUnit = funit;
@@ -81,6 +87,10 @@ namespace SafetyAnalysis.Purity
             Trace.TraceInformation("Method {0}", functionUnit.FunctionSymbol.QualifiedName);
             Trace.Indent();
 
+            //if (functionUnit.FunctionSymbol.QualifiedName.Equals("SafetyAnalysis.Purity.PurityDataUtil::CollapseVertices"))
+            //{
+            //    debug_flag = true;
+            //}
             bool flowGraphExists = (functionUnit.FlowGraph != null);
             if (!flowGraphExists)
             {

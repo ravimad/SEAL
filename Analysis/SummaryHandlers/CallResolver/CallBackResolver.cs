@@ -98,7 +98,7 @@ namespace SafetyAnalysis.Purity.Summaries
             data.AddSkippedCall(call);
 
             //add all the parameters to the graph (if not present)
-            foreach (var param in call.GetAllParams())
+            foreach (var param in call.GetReferredVertices())
             {
                 if (!data.OutHeapGraph.ContainsVertex(param))
                     data.OutHeapGraph.AddVertex(param);                

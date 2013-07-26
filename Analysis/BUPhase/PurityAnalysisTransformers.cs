@@ -163,7 +163,7 @@ namespace SafetyAnalysis.Purity
             IHeapGraphOperandHandler sourceOperandHandler;
             if (!_operandHandlerProvider.TryGetHandler(instruction.SourceOperand, out sourceOperandHandler))
                 return;
-
+            
             var sourceVertices = 
                 sourceOperandHandler.Read(instruction.SourceOperand, data);
 
