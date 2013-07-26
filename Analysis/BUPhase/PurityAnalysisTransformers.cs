@@ -54,7 +54,7 @@ namespace SafetyAnalysis.Purity
             _transformers.Add(Phx.Common.Opcode.Call, Call);
             _transformers.Add(Phx.Common.Opcode.Calli, Calli);
             _transformers.Add(Phx.Common.Opcode.CallVirt, CallVirt);
-            _transformers.Add(Phx.Common.Opcode.Box, CastClass);
+            _transformers.Add(Phx.Common.Opcode.Box, Box);
             _transformers.Add(Phx.Common.Opcode.UnboxAny, CastClass);
             _transformers.Add(Phx.Common.Opcode.Unbox, CastClass); 
             _transformers.Add(Phx.Common.Opcode.CastClass, CastClass);
@@ -127,33 +127,37 @@ namespace SafetyAnalysis.Purity
 
         private void BinOP(Phx.IR.Instruction instruction, PurityAnalysisData data)
         {
-            var graph = data.OutHeapGraph;
-            IEnumerable<HeapVertexBase> source1Vertices = null, source2Vertices = null;
-
-            IHeapGraphOperandHandler sourceOperandHandler;
-            if (_operandHandlerProvider.TryGetHandler(instruction.SourceOperand, out sourceOperandHandler))
+            if (PurityAnalysisPhase.TrackPrimitiveTypes)
             {
-                source1Vertices = sourceOperandHandler.Read(instruction.SourceOperand1, data).ToList();
-            }
+                var graph = data.OutHeapGraph;
+                IEnumerable<HeapVertexBase> source1Vertices = null, source2Vertices = null;
 
-            if (_operandHandlerProvider.TryGetHandler(instruction.SourceOperand2, out sourceOperandHandler))
-            {
-                source2Vertices = sourceOperandHandler.Read(instruction.SourceOperand2, data).ToList();
-            }                
-            IHeapGraphOperandHandler destinationOperandHandler;
-            if (!_operandHandlerProvider.TryGetHandler(instruction.DestinationOperand, out destinationOperandHandler))
-                return;
+                IHeapGraphOperandHandler sourceOperandHandler;
+                if (_operandHandlerProvider.TryGetHandler(instruction.SourceOperand, out sourceOperandHandler))
+                {
+                    source1Vertices = sourceOperandHandler.Read(instruction.SourceOperand1, data).ToList();
+                }
 
-            if (source1Vertices != null && source1Vertices.Any())
-                destinationOperandHandler.Write(instruction.DestinationOperand, data, source1Vertices);
+                if (_operandHandlerProvider.TryGetHandler(instruction.SourceOperand2, out sourceOperandHandler))
+                {
+                    source2Vertices = sourceOperandHandler.Read(instruction.SourceOperand2, data).ToList();
+                }
+                IHeapGraphOperandHandler destinationOperandHandler;
+                if (!_operandHandlerProvider.TryGetHandler(instruction.DestinationOperand, out destinationOperandHandler))
+                    return;
 
-            if (source2Vertices != null && source2Vertices.Any())
-                destinationOperandHandler.Write(instruction.DestinationOperand, data, source2Vertices);
+                if (source1Vertices != null && source1Vertices.Any())
+                    destinationOperandHandler.Write(instruction.DestinationOperand, data, source1Vertices);
+
+                if (source2Vertices != null && source2Vertices.Any())
+                    destinationOperandHandler.Write(instruction.DestinationOperand, data, source2Vertices);
+            }            
         }
 
         private void UnaryOP(Phx.IR.Instruction instruction, PurityAnalysisData data)
         {
-            Assign(instruction, data);
+            if (PurityAnalysisPhase.TrackPrimitiveTypes)
+                Assign(instruction, data);
         }
 
         private void Assign(Phx.IR.Instruction instruction, PurityAnalysisData data)
@@ -196,16 +200,44 @@ namespace SafetyAnalysis.Purity
         private void CastClass(Phx.IR.Instruction instruction, PurityAnalysisData data)
         {
             var graph = data.OutHeapGraph;
-
-            //Contract.Assert(instruction.SourceOperand.IsImmediateOperand);
-            //Contract.Assert(instruction.SourceOperand2 != null && instruction.SourceOperand2.IsExplicit);
-
+           
             IHeapGraphOperandHandler sourceOperandHandler;
             if (!_operandHandlerProvider.TryGetHandler(instruction.SourceOperand2, out sourceOperandHandler))
                 return;
 
             var sourceVertices =
                 sourceOperandHandler.Read(instruction.SourceOperand2, data);
+
+            IHeapGraphOperandHandler destinationOperandHandler;
+            if (!_operandHandlerProvider.TryGetHandler(instruction.DestinationOperand, out destinationOperandHandler))
+                return;
+
+            destinationOperandHandler.Write(instruction.DestinationOperand, data, sourceVertices);
+        }
+
+        private void Box(Phx.IR.Instruction instruction, PurityAnalysisData data)
+        {
+            var graph = data.OutHeapGraph;
+            
+            IHeapGraphOperandHandler sourceOperandHandler;
+            if (!_operandHandlerProvider.TryGetHandler(instruction.SourceOperand2, out sourceOperandHandler))
+                return;
+
+            var sourceVertices =
+                sourceOperandHandler.Read(instruction.SourceOperand2, data);
+            if (!sourceVertices.Any())
+            {
+                //create a source vertex as we are boxing (the vertex is always an internal vertex).
+                var newVertex = NodeEquivalenceRelation.CreateInternalHeapVertex(
+                        instruction.FunctionUnit.FunctionSymbol.QualifiedName,
+                        NodeEquivalenceRelation.GetInternalNodeId(instruction),
+                        Context.EmptyContext);
+                if (!graph.Vertices.Contains(newVertex))
+                    graph.AddVertex(newVertex);
+                data.AddConcreteType(newVertex, "[mscorlib]System.IConvertible");
+
+                sourceVertices = new List<HeapVertexBase> { newVertex };                
+            }
 
             IHeapGraphOperandHandler destinationOperandHandler;
             if (!_operandHandlerProvider.TryGetHandler(instruction.DestinationOperand, out destinationOperandHandler))

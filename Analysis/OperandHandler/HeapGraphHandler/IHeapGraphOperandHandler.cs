@@ -55,21 +55,7 @@ namespace SafetyAnalysis.Purity
 
                 AnalysisUtil.AddApproximateType(data, loadVertex, operand.Field.Type);
 
-                var unloadedVertices = escapingBaseVertices;
-                //IEnumerable<HeapVertexBase> unloadedVertices;
-                //if (PurityAnalysisPhase.InstructionBasedLoadIds)
-                //{
-                //    unloadedVertices = escapingBaseVertices;
-                //}
-                //else
-                //{
-                //    //try reading a base vertex that does not have a load node for the given field
-                //    var loadedVertices = from baseVertex in escapingBaseVertices
-                //                         from successorEdge in data.OutHeapGraph.OutEdges(baseVertex).OfType<ExternalHeapEdge>()
-                //                         where field.Equals(successorEdge.Field)
-                //                         select baseVertex;
-                //    unloadedVertices = escapingBaseVertices.Except(loadedVertices);
-                //}
+                var unloadedVertices = escapingBaseVertices;                
                 foreach (var unloadedBaseVertex in unloadedVertices)
                 {
                     if (!(unloadedBaseVertex is GlobalLoadVertex))

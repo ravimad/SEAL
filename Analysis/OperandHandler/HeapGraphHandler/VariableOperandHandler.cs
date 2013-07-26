@@ -66,7 +66,7 @@ namespace SafetyAnalysis.Purity
                 }
                 else
                     data.OutHeapGraph.AddVertex(varvertex);
-            }
+            }            
 
             //load a vertex to the variable
             LoadField(operand, data, new List<HeapVertexBase> { varvertex }, NullField.Instance);
@@ -106,11 +106,7 @@ namespace SafetyAnalysis.Purity
             IEnumerable<HeapVertexBase> pointstoVertices)
         {
             var id = NodeEquivalenceRelation.GetVariableId(operand);
-            var funcname = operand.FunctionUnit.FunctionSymbol.QualifiedName;
-
-            if (operand.ToString().Equals("CS$0$0002"))
-            {
-            }
+            var funcname = operand.FunctionUnit.FunctionSymbol.QualifiedName;            
 
             var vertex = NodeEquivalenceRelation.CreateVariableHeapVertex(funcname, id, Context.EmptyContext);
 

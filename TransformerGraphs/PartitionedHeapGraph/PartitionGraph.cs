@@ -121,6 +121,8 @@ namespace SafetyAnalysis.Framework.Graphs
                 e = (e == null) ?
                     this.unique.OutEdges(v) : e.Union(this.unique.OutEdges(v));
             }
+            if (e == null)
+                throw new KeyNotFoundException("Vertex not contained in the graph: " + v);
             return e;
         }
 

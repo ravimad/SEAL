@@ -64,8 +64,7 @@ namespace SafetyAnalysis.Purity
         public static int ContextStrBound = 0;                
         public static bool DisableSummaryReduce = false;
         public static bool clearDBContents = false;
-        //public static bool InstructionBasedLoadIds = false;                      
-        //public static bool DisableCallbackHandling = false;
+        public static bool TrackPrimitiveTypes = false;
 
         #endregion analysis flags        
 

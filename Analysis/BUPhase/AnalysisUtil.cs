@@ -42,8 +42,18 @@ namespace SafetyAnalysis.Purity
         /// </summary>
         /// <param name="data"></param>
         public static HeapVertexSet GetInitialEscapeSet(PurityAnalysisData data)
-        {                                                    
-            var argnodes = from var in GetSkcallVariables(data)                           
+        {
+            foreach (var skvar in GetSkcallVariables(data))
+            {
+                if(skvar == null)
+                    throw new SystemException("");
+                foreach (var edge in data.OutHeapGraph.OutEdges(skvar))
+                {
+                    if (edge.Target == null)
+                        throw new SystemException("");
+                }
+            }
+            var argnodes = from var in GetSkcallVariables(data)                                                      
                            from edge in data.OutHeapGraph.OutEdges(var)
                            select edge.Target;
                                

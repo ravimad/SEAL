@@ -65,12 +65,13 @@ namespace SafetyAnalysis.Purity
                 IEnumerable<HeapVertexBase> baseVertices
                     = baseOperandHandler.Read(operand.BaseOperand, data);
 
-                //if (operand.Type.IsPrimitiveType)
-                //{
-                //    //foreach (var vertex in baseVertices)
-                //    //    data.AddRead(vertex, RangeField.AllField);
-                //    return new List<HeapVertexBase>();
-                //}
+                //are we not tracking primitive types ?
+                if (operand.Type.IsPrimitiveType && !PurityAnalysisPhase.TrackPrimitiveTypes)
+                {
+                    //foreach (var baseVertex in baseVertices)
+                    //    data.AddRead(baseVertex, field);
+                    return new List<HeapVertexBase>();
+                }                
                 
                 LoadField(operand, data, baseVertices, field);
 
@@ -102,7 +103,8 @@ namespace SafetyAnalysis.Purity
 
                 foreach (var baseVertex in baseVertices)
                 {
-                    if (operand.Type.IsPrimitiveType || !pointstoVertices.Any())
+                    if ((operand.Type.IsPrimitiveType && !PurityAnalysisPhase.TrackPrimitiveTypes) 
+                        || !pointstoVertices.Any())
                     {
                         data.AddMayWrite(baseVertex, field);
                         if (!pointstoVertices.Any())

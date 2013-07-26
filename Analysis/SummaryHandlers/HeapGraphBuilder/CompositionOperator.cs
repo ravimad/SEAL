@@ -331,7 +331,10 @@ namespace SafetyAnalysis.Purity.Summaries
                 {
                     foreach (var v in finalmap.GetMappedSet(refv))
                     {
-                        //TODO: may need to ensure that the vertex is removed from the strong update set
+                        //remove the vertex from the strong update set
+                        _callerData.RemoveStrongUpdates(v);
+
+                        //add the vertex to the caller graph
                         AddVertexToCallerGraph(v);
                     }
                 }                
