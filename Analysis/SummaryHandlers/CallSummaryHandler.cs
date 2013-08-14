@@ -50,14 +50,7 @@ namespace SafetyAnalysis.Purity.Summaries
             //Contract.Requires(instruction is Phx.IR.CallInstruction);
             var callInstruction = instruction.AsCallInstruction;
             var functionSymbol = PhxUtil.NormalizedFunctionSymbol(callInstruction.FunctionSymbol);
-            var call = this.GetCallFromInstruction(callInstruction, data);
-
-            //var qualname = PhxUtil.GetQualifiedFunctionName(functionSymbol);
-            //if (qualname.Equals(
-            //    "[ScopeRuntime]ScopeRuntime.Row::get_Item/(System.String)[ScopeRuntime]ScopeRuntime.ColumnData"))
-            //{
-            //    Console.WriteLine("found");
-            //}
+            var call = this.GetCallFromInstruction(callInstruction, data);            
 
             //stats;
             if (PurityAnalysisPhase.EnableStats)

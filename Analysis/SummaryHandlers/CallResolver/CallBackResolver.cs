@@ -35,10 +35,7 @@ namespace SafetyAnalysis.Purity.Summaries
             CallType calltype = CallUtil.GetCallType(call,data);
 
             if (calltype.isResolvable == false)
-            {
-                //var methodname = PhxUtil.GetFunctionName(functionUnit.FunctionSymbol);
-                //var encltype = PhxUtil.NormalizedAggregateType(functionUnit.FunctionSymbol.EnclosingAggregateType);
-                //var typename = PhxUtil.GetTypeName(encltype);
+            {                
                 string methodname = null, typename = null;
                 if(call is CallWithMethodName)
                 {

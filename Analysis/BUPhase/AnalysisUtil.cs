@@ -37,22 +37,11 @@ namespace SafetyAnalysis.Purity
         }
   
         /// <summary>
-        /// Everything reachbale from parameters, globals 
-        /// and skipped calls escape.
+        /// Everything reachbale from parameters, globals and skipped calls escape.
         /// </summary>
         /// <param name="data"></param>
         public static HeapVertexSet GetInitialEscapeSet(PurityAnalysisData data)
-        {
-            foreach (var skvar in GetSkcallVariables(data))
-            {
-                if(skvar == null)
-                    throw new SystemException("");
-                foreach (var edge in data.OutHeapGraph.OutEdges(skvar))
-                {
-                    if (edge.Target == null)
-                        throw new SystemException("");
-                }
-            }
+        {            
             var argnodes = from var in GetSkcallVariables(data)                                                      
                            from edge in data.OutHeapGraph.OutEdges(var)
                            select edge.Target;
@@ -95,8 +84,8 @@ namespace SafetyAnalysis.Purity
             {
                 data.OutHeapGraph.AddVertex(recvr);
                 return new List<HeapVertexBase>();
-            } 
-            var recvrVertices = from edge in data.OutHeapGraph.OutEdges(vcall.GetReceiver())
+            }
+            var recvrVertices = from edge in data.OutHeapGraph.OutEdges(recvr)
                                 select edge.Target;
             return recvrVertices;
         }
@@ -407,7 +396,8 @@ namespace SafetyAnalysis.Purity
                 var varv = v as VariableHeapVertex;
                 return NodeEquivalenceRelation.CreateVariableHeapVertex(varv.functionName, varv.index, context);
             }
-            return null;
+            else 
+                return v;
         }
 
         public static List<Object> CreateContextString(List<object> ctstr, List<object> extStr)
