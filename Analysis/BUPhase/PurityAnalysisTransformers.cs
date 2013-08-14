@@ -389,31 +389,33 @@ namespace SafetyAnalysis.Purity
         }
 
         /// <summary>
-        /// Loading a string constant.
-        /// TODO: use a single heap vertex to model string constants.
+        /// Loading a string constant.        
         /// </summary>
         /// <param name="instruction"></param>
         /// <param name="data"></param>
         private void LdStr(Phx.IR.Instruction instruction, PurityAnalysisData data)
         {            
             //approximate all constant strings using a single abstract object            
-            var opname = instruction.SourceOperand1.AsImmediateOperand.Symbol.NameString;
-            var strvalue = opname.Substring(opname.IndexOf('-') + 1);
-            StringConstantVertex strconst = StringConstantVertex.New(strvalue);
-
-            if (!data.OutHeapGraph.ContainsVertex(strconst))
+            if (PurityAnalysisPhase.TrackStringConstants)
             {
-                data.OutHeapGraph.AddVertex(strconst);
-                data.AddConcreteType(strconst, "[mscorlib]System.String");
-            }
+                var opname = instruction.SourceOperand1.AsImmediateOperand.Symbol.NameString;
+                var strvalue = opname.Substring(opname.IndexOf('-') + 1);
+                StringConstantVertex strconst = StringConstantVertex.New(strvalue);
 
-            IHeapGraphOperandHandler handler;
-            if (_operandHandlerProvider.TryGetHandler(instruction.DestinationOperand, out handler))
-            {
-                handler.Write(instruction.DestinationOperand, data, new List<HeapVertexBase> { strconst });
+                if (!data.OutHeapGraph.ContainsVertex(strconst))
+                {
+                    data.OutHeapGraph.AddVertex(strconst);
+                    data.AddConcreteType(strconst, "[mscorlib]System.String");
+                }
+
+                IHeapGraphOperandHandler handler;
+                if (_operandHandlerProvider.TryGetHandler(instruction.DestinationOperand, out handler))
+                {
+                    handler.Write(instruction.DestinationOperand, data, new List<HeapVertexBase> { strconst });
+                }
+                else
+                    throw new SystemException("Cannot find operand handler");
             }
-            else
-                throw new SystemException("Cannot find operand handler");
         }
 
         private void NewObj(Phx.IR.Instruction instruction, PurityAnalysisData data)

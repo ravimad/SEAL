@@ -56,15 +56,15 @@ namespace SafetyAnalysis.Purity
         #endregion debug flags
 
         #region analysis flags
-
-        //note: instruction based load ids should not be enabled if the order in which the bbs will be processed is non-deterministic.
+        
         public static bool FlowSensitivity = false;        
         public static bool DisableExternalCallResolution = false;
         public static bool BoundContextStr = false;
-        public static int ContextStrBound = 0;                
+        public static int  ContextStrBound = 0;                
         public static bool DisableSummaryReduce = false;
         public static bool clearDBContents = false;
         public static bool TrackPrimitiveTypes = false;
+        public static bool TrackStringConstants = false;
 
         #endregion analysis flags        
 
@@ -183,6 +183,12 @@ namespace SafetyAnalysis.Purity
 
             if (properties.TryGetValue("disablesummaryreduce", out value))
                 DisableSummaryReduce = Boolean.Parse(value);
+
+            if (properties.TryGetValue("trackstringconstants", out value))
+                TrackStringConstants = Boolean.Parse(value);
+
+            if (properties.TryGetValue("trackprimitivetypes", out value))
+                TrackPrimitiveTypes = Boolean.Parse(value);
         }
 
         private void InitializeInstanceProperties(Phx.PEModuleUnit moduleunit)
