@@ -1,4 +1,0 @@
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestUnanalyzableCall.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestUnanalyzableCall.pdb
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestUnanalyzableCall\obj\Debug\TestUnanalyzableCall.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestUnanalyzableCall\obj\Debug\TestUnanalyzableCall.pdb

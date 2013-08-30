@@ -1,4 +1,0 @@
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestOptionalArgs.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestOptionalArgs.pdb
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestOptionalArgs\obj\Debug\TestOptionalArgs.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestOptionalArgs\obj\Debug\TestOptionalArgs.pdb

@@ -1,4 +1,0 @@
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestEscapingNodes.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestEscapingNodes.pdb
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestEscapingNodes\obj\Debug\TestEscapingNodes.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestEscapingNodes\obj\Debug\TestEscapingNodes.pdb

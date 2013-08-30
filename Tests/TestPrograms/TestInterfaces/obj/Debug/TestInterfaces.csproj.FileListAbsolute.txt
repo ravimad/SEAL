@@ -1,4 +1,0 @@
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestInterfaces.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestInterfaces.pdb
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestInterfaces\obj\Debug\TestInterfaces.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestInterfaces\obj\Debug\TestInterfaces.pdb

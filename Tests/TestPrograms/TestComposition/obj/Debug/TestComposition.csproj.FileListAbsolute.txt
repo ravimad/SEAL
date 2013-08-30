@@ -1,4 +1,0 @@
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestComposition.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestComposition.pdb
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestComposition\obj\Debug\TestComposition.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestComposition\obj\Debug\TestComposition.pdb

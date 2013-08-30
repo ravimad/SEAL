@@ -1,4 +1,0 @@
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\ConTest2.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\ConTest2.pdb
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\ConcurrencyTests\ConTest2\obj\Debug\ConTest2.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\ConcurrencyTests\ConTest2\obj\Debug\ConTest2.pdb

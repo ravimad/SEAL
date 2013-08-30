@@ -1,5 +1,0 @@
-D:\sd\codebox\SafetyAnalysis\trunk\SafeParallelism\benchmark-dlls\Samples for Parallel Programming with the .NET Framework\C#,C++,F#,VB\ParallelExtensionsExtras\bin\Debug\ParallelExtensionsExtras.dll
-D:\sd\codebox\SafetyAnalysis\trunk\SafeParallelism\benchmark-dlls\Samples for Parallel Programming with the .NET Framework\C#,C++,F#,VB\ParallelExtensionsExtras\bin\Debug\ParallelExtensionsExtras.pdb
-D:\sd\codebox\SafetyAnalysis\trunk\SafeParallelism\benchmark-dlls\Samples for Parallel Programming with the .NET Framework\C#,C++,F#,VB\ParallelExtensionsExtras\obj\Debug\ResolveAssemblyReference.cache
-D:\sd\codebox\SafetyAnalysis\trunk\SafeParallelism\benchmark-dlls\Samples for Parallel Programming with the .NET Framework\C#,C++,F#,VB\ParallelExtensionsExtras\obj\Debug\ParallelExtensionsExtras.dll
-D:\sd\codebox\SafetyAnalysis\trunk\SafeParallelism\benchmark-dlls\Samples for Parallel Programming with the .NET Framework\C#,C++,F#,VB\ParallelExtensionsExtras\obj\Debug\ParallelExtensionsExtras.pdb

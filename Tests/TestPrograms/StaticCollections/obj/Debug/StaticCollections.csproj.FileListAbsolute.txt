@@ -1,4 +1,0 @@
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\StaticCollections.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\StaticCollections.pdb
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\StaticCollections\obj\Debug\StaticCollections.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\StaticCollections\obj\Debug\StaticCollections.pdb

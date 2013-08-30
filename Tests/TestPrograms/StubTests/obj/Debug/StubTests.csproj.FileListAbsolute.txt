@@ -1,4 +1,0 @@
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\StubTests.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\StubTests.pdb
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\StubTests\obj\Debug\StubTests.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\StubTests\obj\Debug\StubTests.pdb

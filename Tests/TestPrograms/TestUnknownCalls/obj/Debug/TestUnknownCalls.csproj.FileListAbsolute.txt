@@ -1,5 +1,0 @@
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestUnknownCalls.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestUnknownCalls.pdb
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestUnknownCalls\obj\Debug\TestUnknownCalls.csprojResolveAssemblyReference.cache
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestUnknownCalls\obj\Debug\TestUnknownCalls.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestUnknownCalls\obj\Debug\TestUnknownCalls.pdb

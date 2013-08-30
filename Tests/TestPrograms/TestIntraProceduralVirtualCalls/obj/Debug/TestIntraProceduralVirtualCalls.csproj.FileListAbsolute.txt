@@ -1,4 +1,0 @@
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestIntraProceduralVirtualCalls.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestIntraProceduralVirtualCalls.pdb
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestIntraProceduralVirtualCalls\obj\Debug\TestIntraProceduralVirtualCalls.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestIntraProceduralVirtualCalls\obj\Debug\TestIntraProceduralVirtualCalls.pdb

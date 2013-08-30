@@ -1,5 +1,0 @@
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Bin\SafetyAnalysis.Graphs.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Bin\SafetyAnalysis.Graphs.pdb
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\TransformerGraphs\obj\Debug\HeapGraph.csprojResolveAssemblyReference.cache
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\TransformerGraphs\obj\Debug\SafetyAnalysis.Graphs.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\TransformerGraphs\obj\Debug\SafetyAnalysis.Graphs.pdb

@@ -1,4 +1,0 @@
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestSkippedCallsMerging.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestSkippedCallsMerging.pdb
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestSkippedCallsMerging\obj\Debug\TestSkippedCallsMerging.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestSkippedCallsMerging\obj\Debug\TestSkippedCallsMerging.pdb

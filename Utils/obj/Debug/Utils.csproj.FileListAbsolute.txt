@@ -1,4 +1,0 @@
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Bin\Util.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Bin\Util.pdb
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Utils\obj\Debug\Util.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Utils\obj\Debug\Util.pdb

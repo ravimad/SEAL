@@ -1,6 +1,0 @@
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Analysis\obj\Debug\ModularAnalysis.csprojResolveAssemblyReference.cache
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Bin\Purity.dll.config
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Bin\Purity.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Bin\Purity.pdb
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Analysis\obj\Debug\Purity.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Analysis\obj\Debug\Purity.pdb

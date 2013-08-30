@@ -1,4 +1,0 @@
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\LinkedList.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\LinkedList.pdb
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\LinkedList\obj\Debug\LinkedList.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\LinkedList\obj\Debug\LinkedList.pdb

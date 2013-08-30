@@ -1,7 +1,0 @@
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\msdia100.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\msdia100.manifest
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\LibPurityTest.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\LibPurityTest.pdb
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\LibTests\obj\Debug\LibTests.csprojResolveAssemblyReference.cache
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\LibTests\obj\Debug\LibPurityTest.dll
-D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\LibTests\obj\Debug\LibPurityTest.pdb
