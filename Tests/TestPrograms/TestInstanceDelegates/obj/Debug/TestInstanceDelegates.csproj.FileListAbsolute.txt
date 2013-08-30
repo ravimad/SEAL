@@ -1,0 +1,4 @@
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestInstanceDelegates.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestInstanceDelegates.pdb
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestInstanceDelegates\obj\Debug\TestInstanceDelegates.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestInstanceDelegates\obj\Debug\TestInstanceDelegates.pdb

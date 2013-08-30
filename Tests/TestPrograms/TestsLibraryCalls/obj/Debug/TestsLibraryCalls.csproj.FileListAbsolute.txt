@@ -1,0 +1,4 @@
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestsLibraryCalls.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestsLibraryCalls.pdb
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestsLibraryCalls\obj\Debug\TestsLibraryCalls.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestsLibraryCalls\obj\Debug\TestsLibraryCalls.pdb

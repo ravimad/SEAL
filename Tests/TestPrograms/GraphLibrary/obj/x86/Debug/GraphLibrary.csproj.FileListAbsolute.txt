@@ -1,0 +1,4 @@
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\GraphLibrary.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\GraphLibrary.pdb
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\GraphLibrary\obj\x86\Debug\GraphLibrary.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\GraphLibrary\obj\x86\Debug\GraphLibrary.pdb

@@ -1,0 +1,4 @@
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestStaticUpdate.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestStaticUpdate.pdb
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestStaticUpdate\obj\Debug\TestStaticUpdate.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestStaticUpdate\obj\Debug\TestStaticUpdate.pdb

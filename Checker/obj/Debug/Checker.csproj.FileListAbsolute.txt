@@ -1,0 +1,8 @@
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Checker\obj\Debug\Checker.csprojResolveAssemblyReference.cache
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Bin\msdia100.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Bin\msdia100.manifest
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Bin\Checker.exe.config
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Bin\Checker.exe
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Bin\Checker.pdb
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Checker\obj\Debug\Checker.exe
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Checker\obj\Debug\Checker.pdb

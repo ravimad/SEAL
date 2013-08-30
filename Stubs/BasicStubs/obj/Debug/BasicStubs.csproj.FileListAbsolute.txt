@@ -1,0 +1,4 @@
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Bin\Stubs.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Bin\Stubs.pdb
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Stubs\BasicStubs\obj\Debug\Stubs.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Stubs\BasicStubs\obj\Debug\Stubs.pdb

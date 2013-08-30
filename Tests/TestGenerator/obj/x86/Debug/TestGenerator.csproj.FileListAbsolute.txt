@@ -1,0 +1,8 @@
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestGenerator\obj\x86\Debug\TestGenerator.csprojResolveAssemblyReference.cache
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\msdia100.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\msdia100.manifest
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestGenerator.exe.config
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestGenerator.exe
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestGenerator.pdb
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestGenerator\obj\x86\Debug\TestGenerator.exe
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestGenerator\obj\x86\Debug\TestGenerator.pdb

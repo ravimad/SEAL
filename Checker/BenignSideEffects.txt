@@ -1,0 +1,8 @@
+[mscorlib]System.Collections.ArrayList::emptyArray
+[mscorlib]System.Collections.SortedList::emptyArray
+[mscorlib]System.Collections.Generic.List`1::_emptyArray
+[System]System.Collections.Generic.Queue`1::_emptyArray
+[System]System.Collections.Generic.Stack`1::_emptyArray
+[mscorlib]System.ArgumentOutOfRangeException::_rangeMessage
+[mscorlib]System.Collections.Generic.EqualityComparer`1::defaultComparer
+[mscorlib]System.Collections.Generic.Comparer`1::defaultComparer

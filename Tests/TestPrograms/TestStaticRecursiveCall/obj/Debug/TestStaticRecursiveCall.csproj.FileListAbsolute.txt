@@ -1,0 +1,4 @@
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestStaticRecursiveCall.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestStaticRecursiveCall.pdb
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestStaticRecursiveCall\obj\Debug\TestStaticRecursiveCall.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestStaticRecursiveCall\obj\Debug\TestStaticRecursiveCall.pdb

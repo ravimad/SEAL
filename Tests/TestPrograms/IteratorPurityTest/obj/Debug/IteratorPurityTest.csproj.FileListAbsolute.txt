@@ -1,0 +1,4 @@
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\IteratorPurityTest.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\IteratorPurityTest.pdb
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\IteratorPurityTest\obj\Debug\IteratorPurityTest.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\IteratorPurityTest\obj\Debug\IteratorPurityTest.pdb

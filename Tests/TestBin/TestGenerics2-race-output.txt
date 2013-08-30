@@ -1,0 +1,36 @@
+Method TestGenerics.I::.ctor Type ()void 
+Written Access-paths: 
+this.g
+
+Read Access-paths: 
+Method TestGenerics.A`1::.ctor Type ()void 
+Written Access-paths: 
+Read Access-paths: 
+Method TestGenerics.A`1::m4 Type (!!0)bool8 
+Written Access-paths: 
+Read Access-paths: 
+arg1.g
+
+Potential call-backs: 
+[mscorlib]System.Object::Equals Type: (System.Object)bool8
+Method TestGenerics.A`1::m3 Type ([TestGenerics2]TestGenerics.A`1,!0)void 
+Written Access-paths: 
+Read Access-paths: 
+arg1.f
+
+Potential call-backs: 
+[mscorlib]System.Object::Equals Type: (System.Object)bool8
+Method TestGenerics.A`1::m2 Type ([TestGenerics2]TestGenerics.A`1,!0)bool8 
+Written Access-paths: 
+Read Access-paths: 
+arg1.f
+
+Potential call-backs: 
+[mscorlib]System.Object::Equals Type: (System.Object)bool8
+[mscorlib]System.Object::Equals Type: (System.Object)bool8
+Method TestGenerics.A`1::m1 Type ([TestGenerics2]TestGenerics.A`1,!0)void 
+Written Access-paths: 
+arg1.f
+
+Read Access-paths: 
+Method UnmanagedEntryPoint Ty

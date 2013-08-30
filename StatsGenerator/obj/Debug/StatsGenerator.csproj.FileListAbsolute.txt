@@ -1,0 +1,4 @@
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Bin\StatsGenerator.exe
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Bin\StatsGenerator.pdb
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\StatsGenerator\obj\Debug\StatsGenerator.exe
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\StatsGenerator\obj\Debug\StatsGenerator.pdb

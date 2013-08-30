@@ -1,0 +1,4 @@
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestDictionaryEnumerator.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestDictionaryEnumerator.pdb
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestDictionaryEnumerator\obj\Debug\TestDictionaryEnumerator.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestDictionaryEnumerator\obj\Debug\TestDictionaryEnumerator.pdb

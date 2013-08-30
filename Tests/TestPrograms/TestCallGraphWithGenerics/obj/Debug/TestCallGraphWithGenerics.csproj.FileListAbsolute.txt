@@ -1,0 +1,4 @@
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestCallGraphWithGenerics.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\TestCallGraphWithGenerics.pdb
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestCallGraphWithGenerics\obj\Debug\TestCallGraphWithGenerics.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\TestCallGraphWithGenerics\obj\Debug\TestCallGraphWithGenerics.pdb

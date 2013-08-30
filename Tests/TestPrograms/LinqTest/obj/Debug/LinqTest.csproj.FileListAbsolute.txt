@@ -1,0 +1,4 @@
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\LinqTest.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestBin\LinqTest.pdb
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\LinqTest\obj\Debug\LinqTest.dll
+D:\codebox\SafetyAnalysis\trunk\SafeParallelism\Tests\TestPrograms\LinqTest\obj\Debug\LinqTest.pdb

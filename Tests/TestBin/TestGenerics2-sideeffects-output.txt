@@ -1,0 +1,25 @@
+Pure methods: 
+Method TestGenerics.I::.ctor Type ()void  is  pure 
+Method TestGenerics.A`1::.ctor Type ()void  is  pure 
+Method UnmanagedEntryPoint Type ()i32  is  pure 
+Conditionally Pure methods: 
+Method TestGenerics.A`1::m4 Type (!!0)bool8  is conditionally pure 
+Skipped calls: 
+[mscorlib]System.Object::Equals Type: (System.Object)bool8
+Method TestGenerics.A`1::m3 Type ([TestGenerics2]TestGenerics.A`1,!0)void  is conditionally pure 
+Skipped calls: 
+[mscorlib]System.Object::Equals Type: (System.Object)bool8
+Method TestGenerics.A`1::m2 Type ([TestGenerics2]TestGenerics.A`1,!0)bool8  is conditionally pure 
+Skipped calls: 
+[mscorlib]System.Object::Equals Type: (System.Object)bool8
+[mscorlib]System.Object::Equals Type: (System.Object)bool8
+ImPure methods: 
+Method TestGenerics.A`1::m1 Type ([TestGenerics2]TestGenerics.A`1,!0)void  is not  pure 
+arg1.f
+
+ImPure Incomplete methods: 
+# of methods: 7
+# of pure methods: 3
+# of conditionally pure methods: 3
+# of impure methods: 1
+# of impure inc
