@@ -362,6 +362,8 @@ namespace SafetyAnalysis.Purity
                             Console.WriteLine("skipping an instantiation");
                         else if (!PhxUtil.DoesBelongToCurrentAssembly(node.FunctionSymbol, moduleUnit))
                             Console.WriteLine("skipping an external method");
+                        else if (node.FunctionSymbol.FunctionUnit == null)
+                            Console.WriteLine("skipping an undefined method: " + node.FunctionSymbol.QualifiedName);
                         else
                             Console.WriteLine("skipping not to analyze method: " + node.FunctionSymbol.QualifiedName);
                     }

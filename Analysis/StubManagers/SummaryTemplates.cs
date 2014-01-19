@@ -104,6 +104,11 @@ namespace SafetyAnalysis.Purity.Summaries
         public static PurityAnalysisData
             GetUnanalyzableCallSummary(string methodname, string containingType)
         {
+
+            //var data = SummaryTemplates.CreatePureData();
+            //var field = NamedField.New(containingType+"::"+methodname, String.Empty);
+            //SummaryTemplates.WriteGlobalObject(data, field);
+            //return data;
             var data = SummaryTemplates.CreatePureData();
 
             //if this is a constructor method

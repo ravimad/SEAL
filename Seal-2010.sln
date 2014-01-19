@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModularAnalysis", "Analysis\ModularAnalysis.csproj", "{56F695FA-E3CB-4A52-969C-DDD50699BB2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checker", "Checker\Checker.csproj", "{E48084D2-3CD4-4261-A60C-57DC10E4E32F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicStubs", "Stubs\BasicStubs\BasicStubs.csproj", "{66AE8442-DEE6-44ED-AD5F-9DAF48AEBAD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeapGraph", "TransformerGraphs\HeapGraph.csproj", "{679A37A4-F974-4675-9DCF-39F797B760F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{2B711579-7195-4E5F-B5DB-031E5929117D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2409885A-2229-4B83-B003-E153E418C0D9}"
+	ProjectSection(SolutionItems) = preProject
+		Configs\all.config = Configs\all.config
+		Configs\default.config = Configs\default.config
+		Configs\mscorlib-.NET4.config = Configs\mscorlib-.NET4.config
+		Configs\multidlls.config = Configs\multidlls.config
+		Configs\stubs-.NET4.config = Configs\stubs-.NET4.config
+		Configs\system-.NET4.config = Configs\system-.NET4.config
+		Configs\system.core-.NET4.config = Configs\system.core-.NET4.config
+		Configs\system.core-test.config = Configs\system.core-test.config
+		Configs\tests-.NET4.config = Configs\tests-.NET4.config
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56F695FA-E3CB-4A52-969C-DDD50699BB2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56F695FA-E3CB-4A52-969C-DDD50699BB2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56F695FA-E3CB-4A52-969C-DDD50699BB2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56F695FA-E3CB-4A52-969C-DDD50699BB2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E48084D2-3CD4-4261-A60C-57DC10E4E32F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E48084D2-3CD4-4261-A60C-57DC10E4E32F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E48084D2-3CD4-4261-A60C-57DC10E4E32F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E48084D2-3CD4-4261-A60C-57DC10E4E32F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66AE8442-DEE6-44ED-AD5F-9DAF48AEBAD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66AE8442-DEE6-44ED-AD5F-9DAF48AEBAD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66AE8442-DEE6-44ED-AD5F-9DAF48AEBAD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66AE8442-DEE6-44ED-AD5F-9DAF48AEBAD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{679A37A4-F974-4675-9DCF-39F797B760F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{679A37A4-F974-4675-9DCF-39F797B760F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{679A37A4-F974-4675-9DCF-39F797B760F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{679A37A4-F974-4675-9DCF-39F797B760F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B711579-7195-4E5F-B5DB-031E5929117D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B711579-7195-4E5F-B5DB-031E5929117D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B711579-7195-4E5F-B5DB-031E5929117D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B711579-7195-4E5F-B5DB-031E5929117D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
