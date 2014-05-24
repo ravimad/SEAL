@@ -143,7 +143,7 @@ namespace SafetyAnalysis.Purity
                 if (displayAsVSErrorMsg)
                     report.DumpAsVSErrorMsg();
                 report.Print(this.outputFileWriter);
-            }
+            }          
 
             this.outputFileWriter.WriteLine("Conditionally Pure methods: ");            
             foreach (var report in condPureReports)
@@ -188,6 +188,7 @@ namespace SafetyAnalysis.Purity
                 sw.Stop();
                 this.outputFileWriter.WriteLine("Serialization time: " + sw.Elapsed);
             }
+            this.outputFileWriter.Close();
         }
 
         public void DumpCumulativeStats(PurityReportGenerationPhase reportphase)
