@@ -156,6 +156,7 @@
     <Compile Include="SummaryHandlers\SummaryReaders\CalleeSummaryReader.cs" />
     <Compile Include="SummaryHandlers\SummaryReaders\puritysummaries.designer.cs" />
     <Compile Include="TypeData\MethodInfo.cs" />
+    <Compile Include="TypeData\TypeCastUtil.cs" />
     <Compile Include="TypeData\TypeHierarchy.cs" />
     <Compile Include="TypeData\TypeInfo.cs" />
     <Compile Include="TypeData\TypeMethodInfoUtil.cs" />

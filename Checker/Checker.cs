@@ -8,6 +8,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.ComponentModel;
+using System.Security.Cryptography;
 
 using SafetyAnalysis.Purity;
 using SafetyAnalysis.Framework.Graphs;
@@ -21,12 +22,24 @@ namespace SafetyAnalysis.Checker
         public static Phx.Controls.CumulativeStringControl input;
         public static Phx.Controls.StringControl configfile;
         public static Phx.Controls.StringControl outdirname;
-        public static string sealHome = Environment.GetEnvironmentVariable("SEALHOME");        
-        public static string DefaultConfigFile = sealHome + @"\Configs\Default.config";        
+        public static string sealHome = Environment.GetEnvironmentVariable("SEALHOME");
+        public static string DefaultConfigFile = sealHome + @"\Configs\Default.config";
+        public static string SourceSinkConfigFile = sealHome + @"\Configs\sourcesink.config";      
 
         //name of the ouput binary if any
         public static Phx.Controls.StringControl output;
-        public static Phx.Controls.StringControl pdbout;               
+        public static Phx.Controls.StringControl pdbout;
+
+        //console options for sourcesink or cast analysis
+        public static Phx.Controls.StringControl analysistype;
+
+        public static Phx.Controls.StringControl sourcefile;
+        public static Phx.Controls.StringControl sourceline;
+        public static Phx.Controls.StringControl sinkfile;
+        public static Phx.Controls.StringControl sinkline;
+        public static Phx.Controls.StringControl castfile;
+        public static Phx.Controls.StringControl castline;
+        public static Phx.Controls.StringControl checkingFunction;
        
         public static void StaticInitialize(string[] arguments)
         {
@@ -89,6 +102,20 @@ namespace SafetyAnalysis.Checker
             Checker.outdirname = Phx.Controls.StringControl.New("outdir",
                 "output directory",
                 Phx.Controls.Control.MakeFileLineLocationString("Checker.cs", 100));
+
+
+            //Added for sourcesink and cast analysis
+
+            Checker.analysistype = Phx.Controls.StringControl.New("analysistype", "analysis type", Phx.Controls.Control.MakeFileLineLocationString("Checker.cs", 100));
+
+            Checker.sourcefile = Phx.Controls.StringControl.New("sourcefile", "source file", Phx.Controls.Control.MakeFileLineLocationString("Checker.cs", 100));
+            Checker.sourceline = Phx.Controls.StringControl.New("sourceline", "source line", Phx.Controls.Control.MakeFileLineLocationString("Checker.cs", 100));
+            Checker.sinkfile = Phx.Controls.StringControl.New("sinkfile", "sink file", Phx.Controls.Control.MakeFileLineLocationString("Checker.cs", 100));
+            Checker.sinkline = Phx.Controls.StringControl.New("sinkline", "sink line", Phx.Controls.Control.MakeFileLineLocationString("Checker.cs", 100));
+            Checker.castfile = Phx.Controls.StringControl.New("castfile", "cast file", Phx.Controls.Control.MakeFileLineLocationString("Checker.cs", 100));
+            Checker.castline = Phx.Controls.StringControl.New("castline", "cast line", Phx.Controls.Control.MakeFileLineLocationString("Checker.cs", 100));
+            Checker.checkingFunction = Phx.Controls.StringControl.New("function", "checking function", Phx.Controls.Control.MakeFileLineLocationString("Checker.cs", 100));
+
         }
 
         //Initialize the dependent architectures and runtimes.
@@ -114,7 +141,21 @@ namespace SafetyAnalysis.Checker
         {
             PurityAnalysisPhase.sealHome = sealHome + "\\";                                                
             FileStream fs;
-            var configfilename = Checker.configfile.GetValue(null);
+            string configfilename = "";
+
+            if (PurityAnalysisPhase.analysistype == "sourcesinkanalysis")
+            {
+                configfilename = SourceSinkConfigFile;
+            }
+            else if(PurityAnalysisPhase.analysistype == "castanalysis")
+            {
+                configfilename = SourceSinkConfigFile;
+            }
+            else if (PurityAnalysisPhase.analysistype == "")
+            {
+                configfilename = Checker.configfile.GetValue(null);
+            }
+
             if (String.IsNullOrEmpty(configfilename))
                 fs = File.OpenRead(DefaultConfigFile);
             else
@@ -191,8 +232,13 @@ namespace SafetyAnalysis.Checker
                     
                     dllnames.Add(moduleUnit.Manifest.Name.NameString);
                     
-                    mainconfig.PhaseList.DoPhaseList(moduleUnit);                    
-                    clientConfig.PhaseList.DoPhase(moduleUnit);                    
+                    mainconfig.PhaseList.DoPhaseList(moduleUnit);
+
+                    if (PurityAnalysisPhase.analysistype == "")
+                    {
+                        clientConfig.PhaseList.DoPhase(moduleUnit);
+                    }
+
                     finalizeConfig.PhaseList.DoPhase(moduleUnit);
 
                     //Cleanup resources attached to the module unit
@@ -297,10 +343,117 @@ namespace SafetyAnalysis.Checker
             else            
                 PurityAnalysisPhase.outputdir = outdirname + "\\";
 
+
+            PurityAnalysisPhase.analysistype = Checker.analysistype.GetValue(null).ToLower();
+
             //load config file
             InitializeProperties();
 
+            if (PurityAnalysisPhase.analysistype == "sourcesinkanalysis")
+            {
+                SafetyAnalysis.Util.SourceSinkUtil.sourceFileName = sourcefile.GetValue(null).ToLower();
+                bool isn = int.TryParse(sourceline.GetValue(null), out SafetyAnalysis.Util.SourceSinkUtil.sourceLineNumber);
+                SafetyAnalysis.Util.SourceSinkUtil.sinkFileName = sinkfile.GetValue(null).ToLower();
+                isn = int.TryParse(sinkline.GetValue(null), out SafetyAnalysis.Util.SourceSinkUtil.sinkLineNumber);
+                SafetyAnalysis.Util.SourceSinkUtil.checkingFunction = checkingFunction.GetValue(null);
+                SourceSinkUtil.generateEdgeLabels();
+
+                /*
+                SafetyAnalysis.Util.SourceSinkUtil.hashFile = sealHome + "\\Hash.txt";
+
+                var dllstream = File.OpenRead(input.GetValue(null).Head.Data);
+
+                SourceSinkUtil.hashNew = BitConverter.ToString(MD5.Create().ComputeHash(dllstream));
+                if (PurityAnalysisPhase.EnableConsoleLogging) Console.WriteLine("Hash : "+ SourceSinkUtil.hashNew);
+
+                if (SourceSinkUtil.hashFileExists())
+                {
+                    SourceSinkUtil.readHashFile();
+                    if (SourceSinkUtil.hashNew == SourceSinkUtil.hashStored)
+                    {
+                        if (PurityAnalysisPhase.EnableConsoleLogging) Console.WriteLine("Hash Matched");
+                        PurityAnalysisPhase.firstTime = false;
+                    }
+                }*/
+            }
+
+            else if (PurityAnalysisPhase.analysistype == "castanalysis")
+            {
+                
+                TypeUtil.TypeCastUtil.castFileName = castfile.GetValue(null).ToLower();
+                bool isn = int.TryParse(castline.GetValue(null), out TypeUtil.TypeCastUtil.castLineNumber);
+                TypeUtil.TypeCastUtil.analyzingFunction = checkingFunction.GetValue(null);
+                TypeUtil.TypeCastUtil.setCastEdgeLabel();
+                
+            }
+
+            else if (PurityAnalysisPhase.analysistype == "")
+            {
+                PurityAnalysisPhase.firstTime = true;
+            }
+
             var termMode = (new Checker()).ProcessModules(inputs);
+
+            if (PurityAnalysisPhase.analysistype == "sourcesinkanalysis")
+            {
+                string finalOutput;
+                if (!SafetyAnalysis.Util.SourceSinkUtil.sourcefound)
+                {
+                    if (SafetyAnalysis.Util.SourceSinkUtil.error1 != "")
+                    {
+                        finalOutput = SafetyAnalysis.Util.SourceSinkUtil.error1;
+                    }
+                    else
+                    {
+                        finalOutput = "Source Not Found";
+                    }
+                }
+                else if (!SafetyAnalysis.Util.SourceSinkUtil.sinkfound)
+                {
+                    if (SafetyAnalysis.Util.SourceSinkUtil.error2 != "")
+                    {
+                        finalOutput = SafetyAnalysis.Util.SourceSinkUtil.error2;
+                    }
+                    else
+                    {
+                        finalOutput = "Sink Not Found";
+                    }
+                }
+                else if (SafetyAnalysis.Util.SourceSinkUtil.answer != "")
+                {
+                    finalOutput = SafetyAnalysis.Util.SourceSinkUtil.answer;
+                }
+                else if (SafetyAnalysis.Util.SourceSinkUtil.answer == "")
+                {
+                    finalOutput = "Function Not Found";
+                }
+                else
+                {
+                    finalOutput = "Error (Bug) (Should Not Happen)";
+                }
+
+                Console.WriteLine(finalOutput);
+            }
+            else if (PurityAnalysisPhase.analysistype == "castanalysis")
+            {
+                string finalOutput;
+
+                if (TypeUtil.TypeCastUtil.instructionFound == false)
+                {
+                    finalOutput = "Cast Instruction Not Found";
+                }
+                else if (TypeUtil.TypeCastUtil.answer == "")
+                {
+                    finalOutput = "Function Not Found";
+                }
+                else
+                {
+                    finalOutput = TypeUtil.TypeCastUtil.answer;
+                }
+
+                Console.WriteLine(finalOutput);
+            }
+
             return (termMode == Phx.Term.Mode.Normal ? 0 : 1);
         }
     }    

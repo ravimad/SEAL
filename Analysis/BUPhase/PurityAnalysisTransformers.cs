@@ -176,6 +176,34 @@ namespace SafetyAnalysis.Purity
                 return;
 
             destinationOperandHandler.Write(instruction.DestinationOperand, data, sourceVertices);
+
+            if (PurityAnalysisPhase.analysistype == "sourcesinkanalysis")
+            {
+                if (SafetyAnalysis.Util.SourceSinkUtil.checkInstructionSource(instruction))
+                {
+                    foreach (HeapVertexBase dv in sourceVertices)
+                    {
+                        HeapEdgeBase edge = new InternalHeapEdge(GlobalLoadVertex.GetInstance(), dv, NamedField.New(SourceSinkUtil.sourceEdgeLabel, null));
+                        if (!data.OutHeapGraph.ContainsHeapEdge(edge))
+                        {
+                            data.OutHeapGraph.AddEdge(edge);
+                        }
+                    }
+                }
+
+                if (SafetyAnalysis.Util.SourceSinkUtil.checkInstructionSink(instruction))
+                {
+                    foreach (HeapVertexBase dv in sourceVertices)
+                    {
+                        HeapEdgeBase edge = new InternalHeapEdge(GlobalLoadVertex.GetInstance(), dv, NamedField.New(SourceSinkUtil.sinkEdgeLabel, null));
+                        if (!data.OutHeapGraph.ContainsHeapEdge(edge))
+                        {
+                            data.OutHeapGraph.AddEdge(edge);
+                        }
+                    }
+                }
+            }
+
         }
 
         private void Call(Phx.IR.Instruction instruction, PurityAnalysisData data)
@@ -213,6 +241,24 @@ namespace SafetyAnalysis.Purity
                 return;
 
             destinationOperandHandler.Write(instruction.DestinationOperand, data, sourceVertices);
+            
+            if (PurityAnalysisPhase.analysistype == "castanalysis")
+            {
+                if (TypeCastUtil.isInstructionCheck(instruction))
+                {
+                    TypeCastUtil.GetTypeInfoFromCastIntruction(instruction);
+
+                    foreach (HeapVertexBase dv in sourceVertices)
+                    {
+                        HeapEdgeBase edge = new InternalHeapEdge(GlobalLoadVertex.GetInstance(), dv, NamedField.New(TypeCastUtil.castEdgeLabel, null));
+                        if (!data.OutHeapGraph.ContainsHeapEdge(edge))
+                        {
+                            data.OutHeapGraph.AddEdge(edge);
+                        }
+                    }
+                }
+            }
+            
         }
 
         private void Box(Phx.IR.Instruction instruction, PurityAnalysisData data)

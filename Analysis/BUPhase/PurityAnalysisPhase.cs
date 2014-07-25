@@ -37,6 +37,9 @@ namespace SafetyAnalysis.Purity
         public static string sealHome;                   
         public const string lambdaDelegateName = "CachedAnonymousMethodDelegate";    
 
+        public static bool firstTime = true;
+        public static string analysistype;
+
         #region output flags
 
         public static bool EnableStats = false;
@@ -292,10 +295,13 @@ namespace SafetyAnalysis.Purity
             //reportConfig.PhaseList.AppendPhase(reportphase);
             //reportConfig.PhaseList.DoPhaseList(moduleUnit);
 
-            //dump analysis time and peak memory used
-            Console.WriteLine("Analysis time: " + sw.Elapsed);
-            Console.WriteLine("# Memory {0} KB",
-                (System.Diagnostics.Process.GetCurrentProcess().PeakVirtualMemorySize64 / 1000));
+            if (PurityAnalysisPhase.analysistype == "")
+            {
+                //dump analysis time and peak memory used
+                Console.WriteLine("Analysis time: " + sw.Elapsed);
+                Console.WriteLine("# Memory {0} KB",
+                    (System.Diagnostics.Process.GetCurrentProcess().PeakVirtualMemorySize64 / 1000));
+            }
 
             if (properties.TryGetValue("unacallsfilenamesuffix", out value))
             {
@@ -326,6 +332,32 @@ namespace SafetyAnalysis.Purity
                     dbContext.Dispose();
                 }
             }
+
+            //TODO: Need to store summaries into a new database when firsttime is true
+            /*
+            if (analysistype == "sourcesinkanalysis" && PurityAnalysisPhase.firstTime)
+            {
+                SourceSinkUtil.createHashFile();
+                if (EnableConsoleLogging) Console.WriteLine("serializing ...");
+                ClearMyDB();
+                PurityDBDataContext dbContext = PurityAnalysisPhase.MyDBContext;
+                CombinedTypeHierarchy.GetInstance(moduleUnit).SerializeInternalTypes(moduleUnit, dbContext);
+                try
+                {
+                    dbContext.SubmitChanges();
+                }
+                catch (System.Data.SqlClient.SqlException sqlE)
+                {
+                    //Console.ForegroundColor = ConsoleColor.Red;
+                    //Console.WriteLine("Exception occurred on commiting changes: " + sqlE.Message);
+                    //Console.ResetColor();
+                }
+                finally
+                {
+                    dbContext.Dispose();
+                }
+            }
+             */
 
             if (EnableStats)
             {                
@@ -410,7 +442,119 @@ namespace SafetyAnalysis.Purity
                 var oldData = (moduleUnit.CallGraph.SummaryManager.RetrieveSummary(
                     node,PurityAnalysisSummary.Type) as PurityAnalysisSummary).PurityData.Copy();
 
-                var newData = (new MethodLevelAnalysis(functionUnit)).Execute();
+                //var newData = (new MethodLevelAnalysis(functionUnit)).Execute();
+
+                PurityAnalysisData newData = null;
+
+                if (firstTime)
+                {
+                    newData = (new MethodLevelAnalysis(functionUnit)).Execute();
+                }
+                else
+                {
+                    //Currently, code will never reach here
+                    /*
+                    if (functionUnit.FirstEnterInstruction.GetFileName().ToString() != null
+                        && SourceSinkUtil.sourceCheck(functionUnit) && SourceSinkUtil.sinkCheck(functionUnit))
+                    {
+                        if (PurityAnalysisPhase.EnableConsoleLogging)
+                            Console.WriteLine("Can be taken from database");
+
+                        string typename = PhxUtil.GetTypeName(node.FunctionSymbol.EnclosingAggregateType);
+                        string methodname = PhxUtil.GetFunctionName(node.FunctionSymbol);
+                        string signature = PhxUtil.GetFunctionTypeSignature(node.FunctionSymbol.FunctionType);
+
+
+                        //TODO: Read from a different database
+                        PurityDBDataContext dbContext = PurityAnalysisPhase.DataContext;
+                        newData = ReadSummaryFromDatabase(dbContext, typename, methodname, signature);
+                        dbContext.Dispose();
+
+                    }
+
+                    if (newData == null)
+                    {
+                        if (PurityAnalysisPhase.EnableConsoleLogging)
+                            Console.WriteLine("Recomputing");
+                        newData = (new MethodLevelAnalysis(functionUnit)).Execute();
+                    }
+                    */
+                }
+
+                //Get the function name in required format (this is to support the plugin)
+                String classAndFunctionName = functionUnit.ToString();
+                String[] tokenized = classAndFunctionName.Split(new char[1] { ':' });
+                String className = tokenized[0];
+                String functionName = functionUnit.FunctionSymbol.ToString();
+                String completeFunctionName = className + "." + functionName;
+
+                if (analysistype == "sourcesinkanalysis")
+                {
+                    if (SafetyAnalysis.Util.SourceSinkUtil.checkingFunction == completeFunctionName)
+                    {
+                        //We reached the analyzing function
+                        bool flows = false;
+
+                        //Checks for intersection between source vertices and sink vertices
+                        List<int> sourceNodes = new List<int>();
+
+                        if (PurityAnalysisPhase.EnableConsoleLogging)
+                            Console.WriteLine("Source Nodes : ");
+
+                        foreach (HeapVertexBase vertex in newData.OutHeapGraph.Vertices)
+                        {
+                            if (vertex is GlobalLoadVertex)
+                            {
+                                foreach (HeapEdgeBase edge in newData.OutHeapGraph.OutEdges(vertex))
+                                {
+                                    if (edge.Field.ToString().Equals("::" + SourceSinkUtil.sourceEdgeLabel))
+                                    {
+                                        if (PurityAnalysisPhase.EnableConsoleLogging)
+                                            Console.WriteLine(edge.Target.Id);
+                                        sourceNodes.Add(edge.Target.Id);
+                                    }
+                                }
+                            }
+                        }
+
+                        if (PurityAnalysisPhase.EnableConsoleLogging)
+                            Console.WriteLine("Sink Nodes : ");
+
+                        foreach (HeapVertexBase vertex in newData.OutHeapGraph.Vertices)
+                        {
+                            if (vertex is GlobalLoadVertex)
+                            {
+                                foreach (HeapEdgeBase edge in newData.OutHeapGraph.OutEdges(vertex))
+                                {
+                                    if (edge.Field.ToString().Equals("::" + SourceSinkUtil.sinkEdgeLabel))
+                                    {
+                                        if (sourceNodes.Contains(edge.Target.Id))
+                                        {
+                                            flows = true;
+                                        }
+                                        if (PurityAnalysisPhase.EnableConsoleLogging)
+                                            Console.WriteLine(edge.Target.Id);
+                                    }
+                                }
+                            }
+                        }
+
+                        SafetyAnalysis.Util.SourceSinkUtil.answer = flows ? "May Flow" : "Does Not Flow";
+                        //The analysis can be terminated here
+                    }
+                }
+
+                if (analysistype == "castanalysis")
+                {
+                    if (TypeCastUtil.analyzingFunction == completeFunctionName)
+                    {
+                        //We reached the analyzing function
+                        TypeCastUtil.check(newData, moduleUnit);
+
+                        //The analysis can be terminated here
+                    }
+                }
+
 
                 //attach the summary                          
                 AttachSummary(functionUnit, newData);
@@ -446,6 +590,43 @@ namespace SafetyAnalysis.Purity
             //moduleUnit.Context.PopUnit();            
         }
 
+        /*
+        private PurityAnalysisData ReadSummaryFromDatabase(PurityDBDataContext dbcontext, string typename, string methodname, string signature)
+        {
+
+            var reports = (from report in dbcontext.puritysummaries
+                           where report.typename.Equals(typename)
+                                     && report.methodname.Equals(methodname)
+                                     && report.methodSignature.Equals(signature)
+                           select report).ToList();
+            int summaryCount = 0;
+            var sumlist = new List<PurityAnalysisData>();
+            foreach (var report in reports)
+            {
+                summaryCount++;
+                //deserialize the summary
+                if (report.purityData != null)
+                {
+                    MemoryStream ms = new MemoryStream(report.purityData.ToArray());
+                    BinaryFormatter deserializer = new BinaryFormatter();
+                    var sum = (PurityAnalysisData)deserializer.Deserialize(ms);
+                    sumlist.Add(sum);
+                    ms.Close();
+                }
+                else
+                    Trace.TraceWarning("DB data for {0} is null", (report.typename + "::" + report.methodname + "/" + report.methodSignature));
+            }
+
+            if (sumlist.Any())
+            {
+                PurityAnalysisData summary = AnalysisUtil.CollapsePurityData(sumlist);
+                return summary;
+            }
+            return null;
+        }
+        */
+
+        
         /// <summary>
         /// Interacts with the user.
         /// </summary>

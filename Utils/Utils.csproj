@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="ExtendedMap.cs" />
     <Compile Include="GeneralUtil.cs" />
+    <Compile Include="SourceSinkUtil.cs" />
     <Compile Include="Triple.cs" />
     <Compile Include="GraphUtil.cs" />
     <Compile Include="Pair.cs" />
