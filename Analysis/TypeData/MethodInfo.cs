@@ -111,18 +111,25 @@ namespace SafetyAnalysis.TypeUtil
         public override PurityAnalysisData GetSummary()
         {
             if (ReadSummary)
-                return summary;
-            
+            {
+                if (summary != null)
+                    return summary.Copy();
+                else return summary; 
+            }
+
             MethodStubManager knownMethodMan;
             if (MethodStubManager.TryGetMethodStubManager(this, out knownMethodMan))
             {
                 //read the summary
                 this.ReadSummary = true;
-                summary =  knownMethodMan.GetSummary(this);
+                summary = knownMethodMan.GetSummary(this);
                 return summary;
             }
             //do not cache here (this is the output of ReadActualSummary is susceptible to change)
-            return ReadSummaryFromStore();
+            var newsum = ReadSummaryFromStore();
+            if (newsum != null)
+                return newsum.Copy();
+            else return newsum; 
         }
 
         public override PurityAnalysisData ReadSummaryFromStore()
@@ -140,10 +147,11 @@ namespace SafetyAnalysis.TypeUtil
                     if (PurityAnalysisPhase.EnableStats)
                     {
                         MethodLevelAnalysis.callee_summaries_count++;
-                    }
+                    }                    
 
                     //return a copy (so that the caller does not mutate the summary)
-                    return puritySummary.PurityData.Copy();
+                   // return puritySummary.PurityData.Copy();
+                    return puritySummary.PurityData;
                 }
             }
             return null;
@@ -244,6 +252,28 @@ namespace SafetyAnalysis.TypeUtil
             return isInstance;
         }
 
+        //private void debugM(PurityAnalysisData sum)
+        //{
+        //    //for debugging
+        //    var glv = SafetyAnalysis.Framework.Graphs.GlobalLoadVertex.GetInstance();
+        //    if (sum != null && sum.MayWriteSet.Keys.Contains(glv))
+        //    {
+        //        var writes = from field in sum.MayWriteSet[glv].OfType<SafetyAnalysis.Framework.Graphs.NamedField>()
+        //                     where field.Name.Equals("System.IO.Stream::Dispose")
+        //                     select field;
+        //        if (writes.Any())
+        //        {
+        //            if (this.GetQualifiedMethodName().Equals("[mscorlib]System.Collections.Generic.Dictionary`2::KeyCollection::Enumerator::Dispose/()void"))
+        //            {
+        //                Console.WriteLine("Dumping cached summary of KeyCollection::Enum::Dispose");
+        //                PurityDataUtil.DumpAsDGML(summary, "debugSummary-cached" + ".dgml", null);
+        //                File.WriteAllText("debugSummary-2" + ".txt", summary.ToString());
+        //                Console.ReadLine();
+        //            }
+        //        }                    
+        //    }
+        //}
+
         public override PurityAnalysisData GetSummary()
         {
             if (PurityAnalysisPhase.EnableStats)
@@ -252,8 +282,10 @@ namespace SafetyAnalysis.TypeUtil
             if (ReadSummary)
             {              
                 if (PurityAnalysisPhase.EnableStats)                
-                    MethodLevelAnalysis.dbcacheHits++;                
-                return summary;
+                    MethodLevelAnalysis.dbcacheHits++;
+                if (summary != null)
+                    return summary.Copy();
+                else return summary;
             }
 
             //read the summary
@@ -267,7 +299,9 @@ namespace SafetyAnalysis.TypeUtil
             }
             //read summary from database
             summary =  this.ReadSummaryFromStore();
-            return summary;
+            if (summary != null)
+                return summary.Copy();
+            else return summary;
         }
 
         public override PurityAnalysisData ReadSummaryFromStore()
@@ -309,7 +343,16 @@ namespace SafetyAnalysis.TypeUtil
             }
             if (sumlist.Any())
             {
-                summary = AnalysisUtil.CollapsePurityData(sumlist);
+                summary = AnalysisUtil.CollapsePurityData(sumlist);     
+           
+                ////for debugging
+                //if (this.GetQualifiedMethodName().Equals("[mscorlib]System.Collections.Generic.Dictionary`2::KeyCollection::Enumerator::Dispose/()void"))
+                //{
+                //    Console.WriteLine("Dumping summary of KeyCollection::Enum::Dispose");                    
+                //    PurityDataUtil.DumpAsDGML(summary, "debugSummary" + ".dgml", null);
+                //    File.WriteAllText("debugSummary" + ".txt", summary.ToString());
+                //    Console.ReadLine();
+                //}
                 return summary;
             }
             return null;
