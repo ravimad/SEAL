@@ -3,6 +3,8 @@ Requirements
 
 * Microsoft.NET 4 Framework
 * Visual Studio 2010
+* Microsoft SQL Server Compact 3.5 Service Pack 2 for Windows Desktop.
+It can be downloaded from here: http://www.microsoft.com/en-us/download/details.aspx?id=5783
 
 Installation Instructions
 --------------------------
