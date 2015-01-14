@@ -6,6 +6,8 @@ Requirements
 * Microsoft SQL Server Compact 3.5 Service Pack 2 for Windows Desktop.
 It can be downloaded from here: http://www.microsoft.com/en-us/download/details.aspx?id=5783
 
+Install the x86 version of SQL Compact 3.5 SP2 (SSCERuntime_x86-ENU.exe)
+
 Installation Instructions
 --------------------------
 
