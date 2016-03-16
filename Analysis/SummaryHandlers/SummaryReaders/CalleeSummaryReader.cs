@@ -107,7 +107,8 @@ namespace SafetyAnalysis.Purity.Summaries
             //update the wholeprogram call graph
             if (this.callerUnit != null)
             {
-                wholecg.AddEdge(PhxUtil.GetQualifiedFunctionName(this.callerUnit.FunctionSymbol), qualifiedName);
+                var callerName = PhxUtil.GetQualifiedFunctionName(this.callerUnit.FunctionSymbol);
+                wholecg.AddEdge(callerName, qualifiedName, callerName);
             }
 
             var typeinfo = CombinedTypeHierarchy.GetInstance(moduleUnit).LookupTypeInfo(decTypename);
@@ -341,7 +342,7 @@ namespace SafetyAnalysis.Purity.Summaries
                     if (call.callingMethodnames != null)
                     {
                         foreach (var mname in call.callingMethodnames)
-                            wholecg.AddEdge(mname, qualifiedName);
+                            wholecg.AddEdge(mname, qualifiedName, PhxUtil.GetQualifiedFunctionName(this.callerUnit.FunctionSymbol));
                     }
 
                     var calleeSum = methodinfo.GetSummary();
@@ -393,7 +394,7 @@ namespace SafetyAnalysis.Purity.Summaries
 
     public class WholeProgramCG : QuickGraph.BidirectionalGraph<WholeCGNode, WholeCGEdge>
     {
-        public void AddEdge(string src, string dest)
+        public void AddEdge(string src, string dest, string label)
         {
             var srcnode = WholeCGNode.New(src);
             var destnode = WholeCGNode.New(dest); 
@@ -402,7 +403,7 @@ namespace SafetyAnalysis.Purity.Summaries
                 this.AddVertex(srcnode);
             if (!this.ContainsVertex(destnode))
                 this.AddVertex(destnode);
-            var edge = new WholeCGEdge(srcnode, destnode);
+            var edge = new WholeCGEdge(srcnode, destnode, label);
             if (!this.ContainsEdge(edge))
                 this.AddEdge(edge);
         }
@@ -451,10 +452,12 @@ namespace SafetyAnalysis.Purity.Summaries
     }
 
     public class WholeCGEdge : QuickGraph.Edge<WholeCGNode>
-    {        
-        public WholeCGEdge(WholeCGNode srcnode, WholeCGNode destnode)
+    {
+        public string Label { get; }
+        public WholeCGEdge(WholeCGNode srcnode, WholeCGNode destnode, string label)
             : base(srcnode,destnode)
-        {            
+        {
+            this.Label = label;
         }
        
         public override bool Equals(object obj)

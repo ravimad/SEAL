@@ -267,6 +267,7 @@ namespace SafetyAnalysis.Checker
                         Purity.Summaries.CalleeSummaryReader.wholecg,
                         (Purity.Summaries.WholeCGNode node) => ((uint)node.id),
                         (Purity.Summaries.WholeCGNode node) => (node.Name),
+                        (Purity.Summaries.WholeCGEdge edge) => (edge.Label),
                         null, null);
                 }
                 return Phx.Term.Mode.Normal;                

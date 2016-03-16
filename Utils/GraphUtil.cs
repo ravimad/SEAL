@@ -219,6 +219,7 @@ namespace SafetyAnalysis.Util
             GraphUtil.DumpAsDGML<CallNode, Edge<CallNode>>("SCCGraph.dgml", sccGraph,
                 (CallNode n) => (n.Id),
                 (CallNode n) => (n.FunctionSymbol.QualifiedName + "(" + n.Id + ")"),
+                null,
                 null,null);
 
             //debugScc(sccGraph);
@@ -277,7 +278,7 @@ namespace SafetyAnalysis.Util
 
         public static void SerializeCallGraphAsDGML(CallGraph cg, XmlWriter writer, System.Func<CallNode,string> summaryinfo)
         {
-            QuickGraph.Action<CallNode, DirectedGraphNode> nodeformater =
+            Action<CallNode, DirectedGraphNode> nodeformater =
                 (CallNode cn, DirectedGraphNode dn) =>
                 {
                     string qualtypename;
@@ -309,7 +310,7 @@ namespace SafetyAnalysis.Util
                     dn.Label = typename+"."+funcname;                    
                 };
 
-            QuickGraph.Action<Edge<CallNode>, DirectedGraphLink> edgeformater =
+            Action<Edge<CallNode>, DirectedGraphLink> edgeformater =
                 (Edge<CallNode> edge, DirectedGraphLink link) =>
                 {
                     link.FontWeight = FontWeightEnum.Bold;
@@ -366,6 +367,7 @@ namespace SafetyAnalysis.Util
             IVertexAndEdgeListGraph<TVertex, TEdge> graph,
             System.Func<TVertex,uint> GetId,
             System.Func<TVertex, string> GetLabel,
+            System.Func<TEdge, string> GetEdgeLabel,
             System.Func<TVertex,IEnumerable<Pair<string,string>>> GetVertexAttrValuePair,
             System.Func<TEdge,IEnumerable<Pair<string,string>>> GetEdgeAttrValuePair)
             where TEdge : IEdge<TVertex>
@@ -378,7 +380,7 @@ namespace SafetyAnalysis.Util
             foreach (var v in graph.Vertices)
             {
                 xmlWriter.WriteStartElement("Node");
-                xmlWriter.WriteAttributeString("Id", GetId(v).ToString()); // id is an unique identifier of the node 
+                xmlWriter.WriteAttributeString("Id", GetId(v).ToString()); // id is an unique identifier of the node                 
                 xmlWriter.WriteAttributeString("Label", GetLabel(v)); // label is the text on the node you see in the graph
                 if (GetVertexAttrValuePair != null)
                 {
@@ -397,6 +399,8 @@ namespace SafetyAnalysis.Util
                     xmlWriter.WriteStartElement("Link");
                     xmlWriter.WriteAttributeString("Source", GetId(edge.Source).ToString()); // ID! of the source node
                     xmlWriter.WriteAttributeString("Target", GetId(edge.Target).ToString()); // ID of the target node 
+                    if (GetEdgeLabel != null)
+                        xmlWriter.WriteAttributeString("Label", GetEdgeLabel(edge));
                     if (GetEdgeAttrValuePair != null)
                     {
                         var pairs = GetEdgeAttrValuePair(edge);

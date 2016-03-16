@@ -12,8 +12,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SafetyAnalysis.Testutils
 {
     public class TestUtil
-    {        
+    {
         public static string sealHome = Environment.GetEnvironmentVariable("SEALHOME");        
+        //public static string sealHome = @"G:\SEAL";
         public static string bindir = sealHome + @"\Tests\TestBin\";        
         public static string serializedFilename = @"Purity-Report.dat";        
 
@@ -28,7 +29,7 @@ namespace SafetyAnalysis.Testutils
             int actual;
             Process checkerProcess = new Process();
             checkerProcess.StartInfo.WorkingDirectory = bindir;            
-            checkerProcess.StartInfo.FileName = "Checker.exe";                
+            checkerProcess.StartInfo.FileName = @"G:\SEAL\Bin\Checker.exe";                
             checkerProcess.StartInfo.Arguments = arguments;
             //checkerProcess.StartInfo.RedirectStandardOutput = true;
             //checkerProcess.StartInfo.RedirectStandardError = true;
