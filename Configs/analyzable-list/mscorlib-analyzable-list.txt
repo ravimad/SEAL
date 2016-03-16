@@ -1,6 +1,7 @@
 Namespace: System.Collections
 Namespace: System.Collections.Generic
 Namespace: System.Collections.ObjectModel
+Namespace: System.Runtime.CompilerServices
 Class: System.Array
 Class: System.Nullable
 Class: System.Nullable`1

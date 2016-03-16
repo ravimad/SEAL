@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace TestReferenceParams
 {
@@ -20,6 +19,11 @@ namespace TestReferenceParams
             ins.mutatef();
         }
 
+        public void barGen<T>(ref T ins) where T : TestReferenceParams
+        {
+            ins.mutatef();
+        }
+
         public void foo(TestReferenceParams inp)
         {
             TestReferenceParams ins = new TestReferenceParams();
@@ -27,22 +31,29 @@ namespace TestReferenceParams
             bar(ref ins);
         }
 
-        public struct TStruct
+        public void foo2(TestReferenceParams inp)
         {
-            public TestReferenceParams f;          
-
-            public void mutateCaller(ref TStruct s)
-            {
-                s.f.mutatef();
-            }
-
-            public void StructFun(TestReferenceParams inp)
-            {
-                TStruct ins = new TStruct();
-                ins.f = inp;
-                mutateCaller(ref ins); 
-            }
+            TestReferenceParams ins = new TestReferenceParams();
+            ins.f = inp;
+            bar(ref ins);
         }
-       
+
+        // The following is a buggy case of handling structs in Seal which needs to be fixed
+        //public struct TStruct
+        //{
+        //    public TestReferenceParams f;          
+
+        //    public void mutateCaller(ref TStruct s)
+        //    {
+        //        s.f.mutatef();
+        //    }
+
+        //    public void StructFun(TestReferenceParams inp)
+        //    {
+        //        TStruct ins = new TStruct();
+        //        ins.f = inp;
+        //        mutateCaller(ref ins); 
+        //    }
+        //}
     }
 }

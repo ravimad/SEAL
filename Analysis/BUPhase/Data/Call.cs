@@ -63,6 +63,11 @@ namespace SafetyAnalysis.Purity
             param.Insert(index,v);
         }
 
+        protected void SetParam(int index, VariableHeapVertex v)
+        {
+            param[index] = v;
+        }
+
         public void AddReturnValue(VariableHeapVertex v)
         {
             //Contract.Assert(v != null);
@@ -119,7 +124,7 @@ namespace SafetyAnalysis.Purity
                 yield return GetReturnValue();
         }
 
-        public virtual void ShallowCopyParams(Call c)
+        protected virtual void ShallowCopyParams(Call c)
         {        
             c.param = this.param;
             c.ret = this.ret;
@@ -257,6 +262,11 @@ namespace SafetyAnalysis.Purity
         public VariableHeapVertex GetReceiver()
         {
             return this.param.First();
+        }
+
+        public void SetReceiver(VariableHeapVertex recv)
+        {
+            this.SetParam(0, recv);
         }
 
         public string GetDeclaringType() { return declaringtype; }

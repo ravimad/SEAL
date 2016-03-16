@@ -338,7 +338,24 @@ namespace SafetyAnalysis.Purity.Summaries
                         AddVertexToCallerGraph(v);
                     }
                 }                
-                _callerData.AddSkippedCall(call);
+                // we need a hack to handle `constrainted` operation made in the callee, 
+                //wherein, if the call is virtual, the receiver should have to be derferenced one level
+                if (call is VirtualCall)
+                {
+                    var vcall = call as VirtualCall;                    
+                    //in case the reciever is pointer to a ref var, deref the receiver (semantics of constrained)
+                    var tgtvars = from edge in _callerData.OutHeapGraph.OutEdges(vcall.GetReceiver())
+                                  select edge.Target;
+                    if (tgtvars.Count() == 1 && tgtvars.First() is VariableHeapVertex)
+                    {
+                        var ncall = vcall.ShallowClone() as VirtualCall;
+                        ncall.SetReceiver(tgtvars.First() as VariableHeapVertex);
+                        _callerData.AddSkippedCall(ncall);
+                    }
+                    else 
+                        _callerData.AddSkippedCall(call);
+                } else 
+                    _callerData.AddSkippedCall(call);
             }
         }
 

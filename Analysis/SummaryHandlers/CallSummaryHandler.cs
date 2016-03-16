@@ -49,9 +49,8 @@ namespace SafetyAnalysis.Purity.Summaries
         {
             //Contract.Requires(instruction is Phx.IR.CallInstruction);
             var callInstruction = instruction.AsCallInstruction;
-            var functionSymbol = PhxUtil.NormalizedFunctionSymbol(callInstruction.FunctionSymbol);
-            var call = this.GetCallFromInstruction(callInstruction, data);            
-
+            var functionSymbol = PhxUtil.NormalizedFunctionSymbol(callInstruction.FunctionSymbol);            
+            var call = this.GetCallFromInstruction(callInstruction, data);
             //stats;
             if (PurityAnalysisPhase.EnableStats)
                 MethodLevelAnalysis.total_method_calls++;
@@ -171,7 +170,7 @@ namespace SafetyAnalysis.Purity.Summaries
                     {
                         constrainedprefix = false;
 
-                        //in case the reciever is pointer to a ref var the deref the receiver (semantics of constrainedprefix)
+                        //in case the reciever is pointer to a ref var, deref the receiver (semantics of constrainedprefix)
                         var tgtvars = from edge in data.OutHeapGraph.OutEdges(paramv)                                      
                                       select edge.Target;
                         if (tgtvars.Count() == 1 && tgtvars.First() is VariableHeapVertex)

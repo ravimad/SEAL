@@ -59,7 +59,7 @@ namespace SafetyAnalysis.Purity.Summaries
                 if (calltype.hasTargets == true)
                 {
                     var calleeSummary =
-                        (new CalleeSummaryReader(functionUnit, moduleUnit)).GetCalleeData(call, data);
+                        (new CalleeSummaryReader(functionUnit, moduleUnit)).GetCalleeData(call, data);                    
                     ApplyTargetsSummary(call, data, calleeSummary, builder as HigherOrderHeapGraphBuilder);
                 }
             }

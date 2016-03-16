@@ -144,4 +144,18 @@ namespace PurityTest {
 	TestUtil.ValidatePurityReports("TestVirtualMethod", arguments, correctOutputFilename);
 	 }
 
+[TestMethod()]
+public void TestReferenceParams()
+{
+    string arguments = "/in " + TestUtil.bindir + "TestReferenceParams.dll" + " /config-file " + TestUtil.sealHome + @"\Configs\tests-.NET4.config";
+    string correctOutputFilename = TestUtil.sealHome + @"\Tests\CorrectOutputs\TestReferenceParams-Purity-Report.dat";
+    TestUtil.ValidatePurityReports("TestReferenceParams", arguments, correctOutputFilename);
+}
+[TestMethod()]
+public void TestGenericCalls()
+{
+    string arguments = "/in " + TestUtil.bindir + "TestGenericCalls.dll" + " /config-file " + TestUtil.sealHome + @"\Configs\tests-.NET4.config";
+    string correctOutputFilename = TestUtil.sealHome + @"\Tests\CorrectOutputs\TestGenericCalls-Purity-Report.dat";
+    TestUtil.ValidatePurityReports("TestGenericCalls", arguments, correctOutputFilename);
+}
  }}
